@@ -44,7 +44,7 @@ Import this module in your module.
 
 ## Component Attributes
 | Attribute             | Type          | Description                               |
-| --------------------- |:-------------:| -----------------------------------------:|
+| --------------------- |:-------------:| :---------------------------------------- |
 | inputId               | string                | The attribute identifier of the html element input. |
 | inputAccept           | string                | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
 | disableUpload         | boolean               | Default `false`. Hide the button upload. |
