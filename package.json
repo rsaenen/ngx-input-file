@@ -67,5 +67,13 @@
     "webpack-dev-server": "2.4.5",
     "webpack-merge": "^4.1.0",
     "zone.js": "^0.8.11"
-  }
+  },
+  "homepage": "https://github.com/rsaenen/ngx-input-file#readme",
+  "keywords": [
+    "angular",
+    "component",
+    "input",
+    "file",
+    "bootstrap"
+  ]
 }
