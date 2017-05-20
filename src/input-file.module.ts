@@ -3,7 +3,6 @@ import { FormsModule }   from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DropZoneDirective } from './directives/drop-zone.directive';
 import { InputFileComponent } from './components/input-file.component';
-import { InputFileRepository } from './repositories/input-file.repository';
 
 @NgModule({
 	declarations: [ 
@@ -18,7 +17,14 @@ import { InputFileRepository } from './repositories/input-file.repository';
 		DropZoneDirective, 
 		InputFileComponent 
 	],
-	providers: [ InputFileRepository ]
+	providers: [],
+	entryComponents: [ InputFileComponent ]
 })
 
-export class InputFileModule {}
+export class InputFileModule {
+	static forRoot() {
+    	return {
+			ngModule: InputFileModule
+		}
+	}
+}

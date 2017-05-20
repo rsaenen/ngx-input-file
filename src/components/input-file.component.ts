@@ -4,35 +4,192 @@ import { File } from '../dto/file';
 
 @Component ({
     selector: 'input-file',
-    templateUrl: './input-file.component.html'
+    style: `
+.input-file .drop-zone {
+  border: 1px dashed #66afe9;
+  border-radius: 5px;
+  background-image: url('../img/dropzone.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 128px;
+  height: 320px;
+  margin-bottom: 15px;
+}
+.input-file .drop-zone .drop-zone-message {
+  text-align: center;
+}
+.input-file .file-preview {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  overflow: auto;
+  padding: 5px;
+  width: 100%;
+}
+.input-file .file-preview .file-preview-item {
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 5px 0 #a2958a;
+  display: table;
+  float: left;
+  margin: 8px;Urls: [ '../styles/style.css' ]
+  padding: 6px;
+  position: relative;
+  text-align: center;
+}
+.input-file .file-preview .file-preview-item .file-content {
+  height: 170px;
+}
+.input-file .file-preview .file-preview-item .file-content img {
+  height: 160px;
+  width: auto;
+}
+.input-file .file-preview .file-preview-item .file-thumbnail-footer {
+  height: 70px;
+  padding-top: 10px;
+}
+.input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {
+  color: #777;
+  display: block;
+  font-size: 11px;
+  margin: 5px auto;
+  overflow: hidden;
+  padding-top: 4px;
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 160px;
+  white-space: nowrap;
+}
+.input-file .file-preview .file-preview-item:hover {
+  box-shadow: 3px 3px 5px 0 #333;
+}
+.input-file .file-caption-main {
+  width: 100%;
+}
+.input-file .file-caption-main .input-active {
+  background-color: #fff;
+  border-color: #5cb3fd;
+  color: #464a4c;
+  outline: 0;
+}
+.input-file .file-caption-main .file-caption-name:focus {
+  outline: 0;
+}
+.input-file .file-caption-main .form-control,
+.input-file .file-caption-main .btn-action {
+  z-index: 10;
+}
+.input-file .file-caption-main .btn-file input[type=file] {
+  background: none;
+  cursor: inherit;
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}`,
+    template: `
+<div class="row input-file" dropZone [disabled]="dropZoneDisabled" (fileDragOver)="onFileDragOver()" (fileDragLeave)="onFileDragLeave()" (fileDrop)="onFileDrop($event)">
+    <div class="col-12 drop-zone" *ngIf="isDragOver">
+        <div class="drop-zone-message">
+        </div>
+    </div>
+    <div class="col-12" *ngIf="isNotNullOrEmpty() && !isDragOver">
+        <div class="file-preview">
+            <button type="button" class="close" (click)="onRemove()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="file-preview-container">
+                <div class="file-preview-item" *ngFor="let file of model; let i = index">
+                    <button type="button" class="close" (click)="onRemoveFile(i)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="file-content">
+                        <img src="{{ file.icon }}" *ngIf="file.icon"> 
+                    </div>
+                    <div class="file-thumbnail-footer">
+                        <div class="file-footer-caption" *ngIf="file.file">
+                            <p>{{ file.file.name }}</p>
+                            <samp>{{ file.size }}</samp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 input-group file-caption-main" *ngIf="!isDragOver">
+        <div class="form-control" [ngClass]="{'input-active': isInputActive}">
+            <div class="file-caption-name" tabindex="500">
+                <i class="fa fa-file-o" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
+                <span>{{ getInputText() }}</span>
+            </div>
+        </div>
+        <span class="input-group-btn">
+            <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" tabindex="500" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>  
+                <span class="hidden-xs-down">{{ textRemove }}</span>
+            </button>
+        </span>
+        <span class="input-group-btn" *ngIf="!disableUpload">
+            <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" tabindex="500" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
+                <span class="hidden-xs-down">{{ textUpload }}</span>
+            </button>
+        </span>
+        <span class="input-group-btn">
+            <div class="btn btn-primary btn-file" tabindex="500" [ngClass]="{'disabled': dropZoneDisabled}">
+                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                <span class="hidden-xs-down">{{ textBrowse }}</span>
+                <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
+                    accept="{{ inputAccept }}" 
+                    [attr.multiple]="inputMaxFiles > 1 ? true : null" 
+                    [disabled]="dropZoneDisabled"
+                    (change)="onChange($event)" 
+                    (blur)="onBlur()" 
+                    (focus)="onFocus()" 
+                    #inputFile>
+            </div>
+        </span>
+    </div>
+</div>`
 })
 
 export class InputFileComponent {
-    @Input() 
+    @Input()
     public inputId: string;
     @Input()
     public inputAccept: string;
     @Input()
-    public inputBrowse: string = "Browse";
+    public disableUpload: boolean = false;
     @Input()
-    public inputFileSelected: string = "files selected";
-    @Input() 
     public inputMaxFiles: number = 1;
     @Input()
-    public inputNoFile: string = "No file selected";
-    @Input()
-    public inputRemove: string = "Remove";
-    @Input() 
     public model: Array<File> = new Array<File>();
+    @Input()
+    public textBrowse: string = "Browse";
+    @Input()
+    public textFileSelected: string = "files selected";
+    @Input()
+    public textNoFile: string = "No file selected";
+    @Input()
+    public textRemove: string = "Remove";
+    @Input()
+    public textUpload: string = "Upload";
 
-    @Output() 
+    @Output()
     public limitReached: EventEmitter<any> = new EventEmitter<any>();
-    @Output() 
-    public rejectedFile: EventEmitter<any> = new EventEmitter<any>();
-    @Output() 
+    @Output()
+    public acceptedFile: EventEmitter<File> = new EventEmitter<File>();
+    @Output()
+    public rejectedFile: EventEmitter<File> = new EventEmitter<File>();
+    @Output()
+    public removedFile: EventEmitter<File> = new EventEmitter<File>();
+    @Output()
     public uploadFiles: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChild('inputFile') 
+    @ViewChild('inputFile')
     public inputFile: any;
     
     public dropZoneDisabled: boolean = false;
@@ -40,7 +197,7 @@ export class InputFileComponent {
     public isInputActive: boolean = false;
     
     private iconExtension: string = ".png";
-    private pathIcon: string = "public/img/";
+    private pathIcon: string = "assets/img/";
     private typeImage: string = "image/";
     
     /**
@@ -124,9 +281,10 @@ export class InputFileComponent {
      * @memberOf InputFileComponent
      */
     public onRemove(): void {
-        this.dropZoneDisabled = false;
-        this.inputFile.nativeElement.value = "";
-        this.model = new Array<any>();
+        for (let file of this.model) {
+            this.removedFileHandler(file);
+        }
+        this.removeHandler();
     }
 
     /**
@@ -137,13 +295,20 @@ export class InputFileComponent {
      * @memberOf InputFileComponent
      */
     public onRemoveFile(index: number): void {
+        this.removedFileHandler(this.model[index]);
         this.model.splice(index, 1);
         this.dropZoneDisabled = false;
         if (!this.model.length) {
-            this.onRemove();
+            this.removeHandler();
         }
     }
 
+    /**
+     * Upload event handler;
+     * 
+     * 
+     * @memberOf InputFileComponent
+     */
     public onUpload(): void {
         this.uploadFiles.emit();
     }
@@ -161,13 +326,13 @@ export class InputFileComponent {
         let inputText: string;
 
         if (this.model == null || !this.model.length) {
-            inputText = this.inputNoFile;
+            inputText = this.textNoFile;
         } 
-        else if (this.model.length < 2) {
+        else if (this.model.length < 2 && this.model[0].file != null) {
             inputText = this.model[0].file.name;
         }
         else {
-            inputText = this.model.length + " " + this.inputFileSelected;
+            inputText = this.model.length + " " + this.textFileSelected;
         }
 
         return inputText;
@@ -179,6 +344,18 @@ export class InputFileComponent {
 
     // Private ---------------------------------------------------------------
     
+    /**
+     * Accepted file handler.
+     * 
+     * @private
+     * @param {File} file The file.
+     * 
+     * @memberOf InputFileComponent
+     */
+    private acceptedFileHandler(file: File): void {
+        this.acceptedFile.emit(file);
+    }
+
     /**
      * Adds multiple files to the model.
      * 
@@ -205,6 +382,7 @@ export class InputFileComponent {
                     }
                     file.file = files[index];
                     this.model.push(file);
+                    this.acceptedFileHandler(file);
                 }
                 else {
                     this.rejectedFileHandler(files[index]);
@@ -292,19 +470,45 @@ export class InputFileComponent {
      * Rejected file handler.
      * 
      * @private
-     * @param {*} file The file.
+     * @param {File} file The file.
      * 
      * @memberOf InputFileComponent
      */
-    private rejectedFileHandler(file: any): void {
+    private rejectedFileHandler(file: File): void {
         this.rejectedFile.emit(file);
     }
 
     /**
+     * Removed file handler.
+     * 
+     * @private
+     * @param {File} file The file.
+     * 
+     * @memberOf InputFileComponent
+     */
+    private removedFileHandler(file: File): void {
+        this.removedFile.emit(file);
+    }
+
+    /**
+     * Remove handler.
+     * 
+     * @private
+     * 
+     * @memberOf InputFileComponent
+     */
+    private removeHandler(): void {
+        this.dropZoneDisabled = false;
+        this.inputFile.nativeElement.value = "";
+        this.model = new Array<File>();
+    }
+    
+    /**
      * Sets the icon of the file.
      * 
      * @private
-     * @param {*} file The file.
+     * @param {File} file The file.
+     * @param {*} inputFile The input file.
      * 
      * @memberOf InputFileComponent
      */
