@@ -93,14 +93,8 @@ public post(file: any): Observable<Image> {
 ```
 
 ## IMPORTANT!
-Angular/cli triggers this exception at launch.
-```
-ERROR in InputFileModule is not an NgModule
-```
-Just save any file and all works, this issue will be correct soon.
-
-Icons is not packaged with the module.
-Default path of file icons is `assets/img` with the extension `.png`.
+Icons is not packaged with the module.  
+Default path of file icons is `assets/img` with the extension `.png`.  
 Any help is welcome to package icons or configure the path and extension.
 
 ## For developpers
