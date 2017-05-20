@@ -1,5 +1,5 @@
+import { InputFileRepository } from './repositories/input-file.repository';
 export declare class InputFileModule {
-    static forRoot(): {
-        ngModule: typeof InputFileModule;
-    };
+    inputFileRepository: InputFileRepository;
+    constructor(inputFileRepository?: InputFileRepository);
 }
