@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var file_1 = require("../dto/file");
@@ -349,77 +340,32 @@ var InputFileComponent = (function () {
     };
     return InputFileComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "inputId", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "inputAccept", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], InputFileComponent.prototype, "disableUpload", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], InputFileComponent.prototype, "inputMaxFiles", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], InputFileComponent.prototype, "model", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textBrowse", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textFileSelected", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textNoFile", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textRemove", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textUpload", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "limitReached", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "acceptedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "rejectedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "removedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "uploadFiles", void 0);
-__decorate([
-    core_1.ViewChild('inputFile'),
-    __metadata("design:type", Object)
-], InputFileComponent.prototype, "inputFile", void 0);
-InputFileComponent = __decorate([
-    core_1.Component({
-        selector: 'input-file',
-        style: "\n.input-file .drop-zone {\n  border: 1px dashed #66afe9;\n  border-radius: 5px;\n  background-image: url('../img/dropzone.png');\n  background-repeat: no-repeat;\n  background-position: center center;\n  background-size: 128px;\n  height: 320px;\n  margin-bottom: 15px;\n}\n.input-file .drop-zone .drop-zone-message {\n  text-align: center;\n}\n.input-file .file-preview {\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  margin-bottom: 5px;\n  overflow: auto;\n  padding: 5px;\n  width: 100%;\n}\n.input-file .file-preview .file-preview-item {\n  border: 1px solid #ddd;\n  box-shadow: 1px 1px 5px 0 #a2958a;\n  display: table;\n  float: left;\n  margin: 8px;Urls: [ '../styles/style.css' ]\n  padding: 6px;\n  position: relative;\n  text-align: center;\n}\n.input-file .file-preview .file-preview-item .file-content {\n  height: 170px;\n}\n.input-file .file-preview .file-preview-item .file-content img {\n  height: 160px;\n  width: auto;\n}\n.input-file .file-preview .file-preview-item .file-thumbnail-footer {\n  height: 70px;\n  padding-top: 10px;\n}\n.input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {\n  color: #777;\n  display: block;\n  font-size: 11px;\n  margin: 5px auto;\n  overflow: hidden;\n  padding-top: 4px;\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 160px;\n  white-space: nowrap;\n}\n.input-file .file-preview .file-preview-item:hover {\n  box-shadow: 3px 3px 5px 0 #333;\n}\n.input-file .file-caption-main {\n  width: 100%;\n}\n.input-file .file-caption-main .input-active {\n  background-color: #fff;\n  border-color: #5cb3fd;\n  color: #464a4c;\n  outline: 0;\n}\n.input-file .file-caption-main .file-caption-name:focus {\n  outline: 0;\n}\n.input-file .file-caption-main .form-control,\n.input-file .file-caption-main .btn-action {\n  z-index: 10;\n}\n.input-file .file-caption-main .btn-file input[type=file] {\n  background: none;\n  cursor: inherit;\n  display: block;\n  min-width: 100%;\n  min-height: 100%;\n  opacity: 0;\n  position: absolute;\n  right: 0;\n  text-align: right;\n  top: 0;\n}",
-        template: "\n<div class=\"row input-file\" dropZone [disabled]=\"dropZoneDisabled\" (fileDragOver)=\"onFileDragOver()\" (fileDragLeave)=\"onFileDragLeave()\" (fileDrop)=\"onFileDrop($event)\">\n    <div class=\"col-12 drop-zone\" *ngIf=\"isDragOver\">\n        <div class=\"drop-zone-message\">\n        </div>\n    </div>\n    <div class=\"col-12\" *ngIf=\"isNotNullOrEmpty() && !isDragOver\">\n        <div class=\"file-preview\">\n            <button type=\"button\" class=\"close\" (click)=\"onRemove()\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <div class=\"file-preview-container\">\n                <div class=\"file-preview-item\" *ngFor=\"let file of model; let i = index\">\n                    <button type=\"button\" class=\"close\" (click)=\"onRemoveFile(i)\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <div class=\"file-content\">\n                        <img src=\"{{ file.icon }}\" *ngIf=\"file.icon\"> \n                    </div>\n                    <div class=\"file-thumbnail-footer\">\n                        <div class=\"file-footer-caption\" *ngIf=\"file.file\">\n                            <p>{{ file.file.name }}</p>\n                            <samp>{{ file.size }}</samp>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-12 input-group file-caption-main\" *ngIf=\"!isDragOver\">\n        <div class=\"form-control\" [ngClass]=\"{'input-active': isInputActive}\">\n            <div class=\"file-caption-name\" tabindex=\"500\">\n                <i class=\"fa fa-file-o\" aria-hidden=\"true\" *ngIf=\"isNotNullOrEmpty()\"></i>\n                <span>{{ getInputText() }}</span>\n            </div>\n        </div>\n        <span class=\"input-group-btn\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Clear selected files\" tabindex=\"500\" (click)=\"onRemove()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textRemove }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\" *ngIf=\"!disableUpload\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Upload selected files\" tabindex=\"500\" (click)=\"onUpload()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-cloud-upload\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textUpload }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\">\n            <div class=\"btn btn-primary btn-file\" tabindex=\"500\" [ngClass]=\"{'disabled': dropZoneDisabled}\">\n                <i class=\"fa fa-folder-open-o\" aria-hidden=\"true\"></i>\n                <span class=\"hidden-xs-down\">{{ textBrowse\u00A0}}</span>\n                <input id=\"{{ inputId }}\" class=\"file\" name=\"input-file-name\" type=\"file\" \n                    accept=\"{{ inputAccept }}\" \n                    [attr.multiple]=\"inputMaxFiles > 1 ? true : null\" \n                    [disabled]=\"dropZoneDisabled\"\n                    (change)=\"onChange($event)\" \n                    (blur)=\"onBlur()\" \n                    (focus)=\"onFocus()\" \n                    #inputFile>\n            </div>\n        </span>\n    </div>\n</div>"
-    }),
-    __metadata("design:paramtypes", [])
-], InputFileComponent);
+InputFileComponent.decorators = [
+    { type: core_1.Component, args: [{
+                selector: 'input-file',
+                style: "\n.input-file .drop-zone {\n  border: 1px dashed #66afe9;\n  border-radius: 5px;\n  background-image: url('../img/dropzone.png');\n  background-repeat: no-repeat;\n  background-position: center center;\n  background-size: 128px;\n  height: 320px;\n  margin-bottom: 15px;\n}\n.input-file .drop-zone .drop-zone-message {\n  text-align: center;\n}\n.input-file .file-preview {\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  margin-bottom: 5px;\n  overflow: auto;\n  padding: 5px;\n  width: 100%;\n}\n.input-file .file-preview .file-preview-item {\n  border: 1px solid #ddd;\n  box-shadow: 1px 1px 5px 0 #a2958a;\n  display: table;\n  float: left;\n  margin: 8px;Urls: [ '../styles/style.css' ]\n  padding: 6px;\n  position: relative;\n  text-align: center;\n}\n.input-file .file-preview .file-preview-item .file-content {\n  height: 170px;\n}\n.input-file .file-preview .file-preview-item .file-content img {\n  height: 160px;\n  width: auto;\n}\n.input-file .file-preview .file-preview-item .file-thumbnail-footer {\n  height: 70px;\n  padding-top: 10px;\n}\n.input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {\n  color: #777;\n  display: block;\n  font-size: 11px;\n  margin: 5px auto;\n  overflow: hidden;\n  padding-top: 4px;\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 160px;\n  white-space: nowrap;\n}\n.input-file .file-preview .file-preview-item:hover {\n  box-shadow: 3px 3px 5px 0 #333;\n}\n.input-file .file-caption-main {\n  width: 100%;\n}\n.input-file .file-caption-main .input-active {\n  background-color: #fff;\n  border-color: #5cb3fd;\n  color: #464a4c;\n  outline: 0;\n}\n.input-file .file-caption-main .file-caption-name:focus {\n  outline: 0;\n}\n.input-file .file-caption-main .form-control,\n.input-file .file-caption-main .btn-action {\n  z-index: 10;\n}\n.input-file .file-caption-main .btn-file input[type=file] {\n  background: none;\n  cursor: inherit;\n  display: block;\n  min-width: 100%;\n  min-height: 100%;\n  opacity: 0;\n  position: absolute;\n  right: 0;\n  text-align: right;\n  top: 0;\n}",
+                template: "\n<div class=\"row input-file\" dropZone [disabled]=\"dropZoneDisabled\" (fileDragOver)=\"onFileDragOver()\" (fileDragLeave)=\"onFileDragLeave()\" (fileDrop)=\"onFileDrop($event)\">\n    <div class=\"col-12 drop-zone\" *ngIf=\"isDragOver\">\n        <div class=\"drop-zone-message\">\n        </div>\n    </div>\n    <div class=\"col-12\" *ngIf=\"isNotNullOrEmpty() && !isDragOver\">\n        <div class=\"file-preview\">\n            <button type=\"button\" class=\"close\" (click)=\"onRemove()\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <div class=\"file-preview-container\">\n                <div class=\"file-preview-item\" *ngFor=\"let file of model; let i = index\">\n                    <button type=\"button\" class=\"close\" (click)=\"onRemoveFile(i)\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <div class=\"file-content\">\n                        <img src=\"{{ file.icon }}\" *ngIf=\"file.icon\"> \n                    </div>\n                    <div class=\"file-thumbnail-footer\">\n                        <div class=\"file-footer-caption\" *ngIf=\"file.file\">\n                            <p>{{ file.file.name }}</p>\n                            <samp>{{ file.size }}</samp>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-12 input-group file-caption-main\" *ngIf=\"!isDragOver\">\n        <div class=\"form-control\" [ngClass]=\"{'input-active': isInputActive}\">\n            <div class=\"file-caption-name\" tabindex=\"500\">\n                <i class=\"fa fa-file-o\" aria-hidden=\"true\" *ngIf=\"isNotNullOrEmpty()\"></i>\n                <span>{{ getInputText() }}</span>\n            </div>\n        </div>\n        <span class=\"input-group-btn\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Clear selected files\" tabindex=\"500\" (click)=\"onRemove()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textRemove }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\" *ngIf=\"!disableUpload\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Upload selected files\" tabindex=\"500\" (click)=\"onUpload()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-cloud-upload\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textUpload }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\">\n            <div class=\"btn btn-primary btn-file\" tabindex=\"500\" [ngClass]=\"{'disabled': dropZoneDisabled}\">\n                <i class=\"fa fa-folder-open-o\" aria-hidden=\"true\"></i>\n                <span class=\"hidden-xs-down\">{{ textBrowse\u00A0}}</span>\n                <input id=\"{{ inputId }}\" class=\"file\" name=\"input-file-name\" type=\"file\" \n                    accept=\"{{ inputAccept }}\" \n                    [attr.multiple]=\"inputMaxFiles > 1 ? true : null\" \n                    [disabled]=\"dropZoneDisabled\"\n                    (change)=\"onChange($event)\" \n                    (blur)=\"onBlur()\" \n                    (focus)=\"onFocus()\" \n                    #inputFile>\n            </div>\n        </span>\n    </div>\n</div>"
+            },] },
+];
+/** @nocollapse */
+InputFileComponent.ctorParameters = function () { return []; };
+InputFileComponent.propDecorators = {
+    'inputId': [{ type: core_1.Input },],
+    'inputAccept': [{ type: core_1.Input },],
+    'disableUpload': [{ type: core_1.Input },],
+    'inputMaxFiles': [{ type: core_1.Input },],
+    'model': [{ type: core_1.Input },],
+    'textBrowse': [{ type: core_1.Input },],
+    'textFileSelected': [{ type: core_1.Input },],
+    'textNoFile': [{ type: core_1.Input },],
+    'textRemove': [{ type: core_1.Input },],
+    'textUpload': [{ type: core_1.Input },],
+    'limitReached': [{ type: core_1.Output },],
+    'acceptedFile': [{ type: core_1.Output },],
+    'rejectedFile': [{ type: core_1.Output },],
+    'removedFile': [{ type: core_1.Output },],
+    'uploadFiles': [{ type: core_1.Output },],
+    'inputFile': [{ type: core_1.ViewChild, args: ['inputFile',] },],
+};
 exports.InputFileComponent = InputFileComponent;
 //# sourceMappingURL=input-file.component.js.map

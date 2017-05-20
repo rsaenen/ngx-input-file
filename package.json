@@ -17,8 +17,8 @@
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
     "clean": "rimraf dist",
-    "build": "npm-run-all --serial upgrade clean build:tsc build:umd build:app",
-    "build:tsc": "tsc -p tsconfig.json",
+    "build": "npm-run-all --serial clean build:ngc build:umd build:app",
+    "build:ngc": "ngc -p tsconfig.ngc.json",
     "build:umd": "NODE_ENV=prod webpack",
     "build:app": "NODE_ENV=prod webpack --config webpack.config.js",
     "upgrade": "npm-check-updates --upgradeAll"
@@ -62,7 +62,7 @@
     "style-loader": "^0.17.0",
     "ts-loader": "^2.0.3",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2",
+    "typescript": "2.0.10",
     "webpack": "2.5.1",
     "webpack-dev-server": "2.4.5",
     "webpack-merge": "^4.1.0",
