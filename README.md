@@ -92,5 +92,10 @@ public post(file: any): Observable<Image> {
 }
 ```
 
+## IMPORTANT!
+Icons is not packaged with the module.
+Default path of file icons is `assets/img` with the extension `.png`.
+Any help is welcome to package icons or configure the path and extension.
+
 ## For developpers
-Any help is welcome, please fork this repository to make pull request.
+You're welcomed, please fork this repository to make pull request.
