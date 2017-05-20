@@ -79,5 +79,18 @@ Import this module in your module.
 </input-file> 
 ```
 
+```ts
+import { InputFileRepository } from 'ngx-input-file';
+
+constructor(
+    public inputFileRepository: InputFileRepository) 
+{}
+
+public post(file: any): Observable<Image> {
+    const apiUrl = 'http://dump.api/files';
+    return this.inputFileRepository.post(file, apiUrl);
+}
+```
+
 ## For developpers
 Any help is welcome, please fork this repository to make pull request.
