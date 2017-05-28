@@ -31,19 +31,19 @@ var config = {
       },
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        use: 'html-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+        use: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
         test: /\.css$/,
-        loader: 'raw-loader'
+        use: 'raw-loader'
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract({ fallbackLoader: "style-loader", loader: "css-loader!less-loader" })
+        use: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader!less-loader" })
       }
     ]
   }
