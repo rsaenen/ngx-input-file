@@ -18,6 +18,15 @@ The component is compatible with [Bootstrap 4](https://v4-alpha.getbootstrap.com
 npm install ngx-input-file
 ```
 
+Include style to your `.angular-cli.json` or your `webpack` vendor. Example:
+```
+"styles": [
+    ...
+    "../node_modules/ngx-input-file/style/style.css",  
+    ... 
+],
+```
+  
 ## Basic Configuration
 Create a new `ngx-input-file.module.ts` file with the following code:
 ```ts
