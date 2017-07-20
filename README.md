@@ -11,7 +11,9 @@ The component is compatible with [Bootstrap 4](https://v4-alpha.getbootstrap.com
 ## Key features
  - Preview of the file
  - Drag and drop zone
- - Uploads files with headers like `Authorization`.
+ - Responsive
+ - [Font Awesome](http://fontawesome.io/) support
+ - Uploads files with headers like `Authorization` (deprecated, other modules uploads files better than this one)
 
 ## Installation 
 ```bash
@@ -27,7 +29,8 @@ Include style to your `.angular-cli.json` or your `webpack` vendor. Example:
 ],
 ```
   
-## Basic Configuration
+## Basic Configuration (deprecated)
+The goal of this module is not to upload file but to provide a component to replace the html element input.  
 Create a new `ngx-input-file.module.ts` file with the following code:
 ```ts
 import { NgModule } from '@angular/core';
@@ -70,6 +73,18 @@ Import this module in your module.
 | removedFile           | EventEmitter<File>    | Triggered when a file is removed. |
 | uploadFiles           | EventEmitter<any>     | Triggered when the user click on the button upload. |
 
+## Supported icons
+The type is the mime type of the file.  
+The extension is a shortly example of the file extension.
+To add an other type, please open a issue.
+
+| Type                                                                    | Extension      |
+| ----------------------------------------------------------------------- |:--------------:|
+| application/pdf                                                         | pdf            |
+| application/vnd.openxmlformats-officedocument.wordprocessingml.document | doc, docx, ... |
+| application/zip                                                         | zip            |
+| default                                                                 | any            |
+
 ## Example
 
 ```html
@@ -96,7 +111,7 @@ constructor(
 {}
 
 public post(file: any): Observable<Image> {
-    const apiUrl = 'http://dump.api/files';
+    const apiUrl = 'http://dumb.any/api/files';
     return this.inputFileRepository.post(file, apiUrl);
 }
 ```
@@ -104,7 +119,9 @@ public post(file: any): Observable<Image> {
 ## IMPORTANT!
 Icons is not packaged with the module.  
 Default path of file icons is `assets/img` with the extension `.png`.  
+Please use (@angular/cli)[https://cli.angular.io/], `ng new ...` manages the folder `assets`.  
 Any help is welcome to package icons or configure the path and extension.
+You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=2&price=free).
 
 ## For developpers
-You're welcomed, please fork this repository to make pull request.
+You're welcome, please fork this repository to a make pull request.
