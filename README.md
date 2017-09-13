@@ -119,7 +119,7 @@ public post(file: any): Observable<Image> {
 ## IMPORTANT!
 Icons is not packaged with the module.  
 Default path of file icons is `assets/img` with the extension `.png`.  
-Please use (angular cli)[https://cli.angular.io/], `ng new ...` manages the folder `assets`.  
+Please use [@angular/cli](https://cli.angular.io/), `ng new ...` manages the folder `assets`.  
 Any help is welcome to package icons or configure the path and extension.
 You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=2&price=free).
 

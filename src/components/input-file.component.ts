@@ -43,19 +43,19 @@ import { File } from '../dto/file';
         <span class="input-group-btn">
             <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" tabindex="500" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>  
-                <span class="d-none d-md-block">{{ textRemove }}</span>
+                <span class="d-none d-md-inline-flex">{{ textRemove }}</span>
             </button>
         </span>
         <span class="input-group-btn" *ngIf="!disableUpload">
             <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" tabindex="500" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
                 <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
-                <span class="d-none d-md-block">{{ textUpload }}</span>
+                <span class="d-none d-md-inline-flex">{{ textUpload }}</span>
             </button>
         </span>
         <span class="input-group-btn">
             <div class="btn btn-primary btn-file" tabindex="500" [ngClass]="{'disabled': dropZoneDisabled}">
                 <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                <span class="d-none d-md-block">{{ textBrowse }}</span>
+                <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
                 <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
                     accept="{{ inputAccept }}" 
                     [attr.multiple]="inputMaxFiles > 1 ? true : null" 
