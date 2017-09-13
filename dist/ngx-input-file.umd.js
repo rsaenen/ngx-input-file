@@ -7,7 +7,7 @@
 		exports["ngx-input-file"] = factory(require("@angular/core"), require("@angular/forms"), require("@angular/platform-browser"));
 	else
 		root["ngx-input-file"] = factory(root["@angular/core"], root["@angular/forms"], root["@angular/platform-browser"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_23__, __WEBPACK_EXTERNAL_MODULE_24__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -43,9 +43,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -73,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -106,7 +103,7 @@ exports.root = _root;
     }
 })();
 //# sourceMappingURL=root.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
 /* 2 */
@@ -125,7 +122,138 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var file_1 = __webpack_require__(11);
+var DropZoneDirective = (function () {
+    /**
+     * Creates an instance of DropZoneDirective.
+     *
+     * @memberOf DropZoneDirective
+     */
+    function DropZoneDirective() {
+        this.disabled = false;
+        this.fileDragOver = new core_1.EventEmitter();
+        this.fileDragLeave = new core_1.EventEmitter();
+        this.fileDrop = new core_1.EventEmitter();
+        this.isDragOverDisabled = false;
+    }
+    // Events ----------------------------------------------------------------
+    /**
+     * Drag Over event handler.
+     *
+     * @param {Event} event The event.
+     *
+     * @memberOf DropZoneDirective
+     */
+    DropZoneDirective.prototype.onDragOver = function (event) {
+        this.preventAndStopEventPropagation(event);
+        if (!this.isDragOverDisabled && !this.disabled) {
+            this.isDragOverDisabled = true;
+            this.fileDragOver.emit();
+        }
+    };
+    /**
+     * Drag Leave event handler.
+     *
+     * @param {Event} event The event.
+     *
+     * @memberOf DropZoneDirective
+     */
+    DropZoneDirective.prototype.onDragLeave = function (event) {
+        this.preventAndStopEventPropagation(event);
+        if (this.isDragOverDisabled && !this.disabled) {
+            this.isDragOverDisabled = false;
+            this.fileDragLeave.emit();
+        }
+    };
+    /**
+     * Drop event handler.
+     *
+     * @param {*} event The event.
+     *
+     * @memberOf DropZoneDirective
+     */
+    DropZoneDirective.prototype.onDrop = function (event) {
+        if (!this.disabled) {
+            this.isDragOverDisabled = false;
+            this.preventAndStopEventPropagation(event);
+            this.fileDrop.emit(event.dataTransfer.files);
+        }
+    };
+    // Private ---------------------------------------------------------------
+    /**
+     * Prevents and stops event propagration.
+     *
+     * @private
+     * @param {Event} event The event.
+     *
+     * @memberOf DropZoneDirective
+     */
+    DropZoneDirective.prototype.preventAndStopEventPropagation = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], DropZoneDirective.prototype, "disabled", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], DropZoneDirective.prototype, "fileDragOver", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], DropZoneDirective.prototype, "fileDragLeave", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], DropZoneDirective.prototype, "fileDrop", void 0);
+    __decorate([
+        core_1.HostListener('dragover', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Event]),
+        __metadata("design:returntype", void 0)
+    ], DropZoneDirective.prototype, "onDragOver", null);
+    __decorate([
+        core_1.HostListener('dragleave', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Event]),
+        __metadata("design:returntype", void 0)
+    ], DropZoneDirective.prototype, "onDragLeave", null);
+    __decorate([
+        core_1.HostListener('drop', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], DropZoneDirective.prototype, "onDrop", null);
+    DropZoneDirective = __decorate([
+        core_1.Directive({
+            selector: '[dropZone]'
+        }),
+        __metadata("design:paramtypes", [])
+    ], DropZoneDirective);
+    return DropZoneDirective;
+}());
+exports.DropZoneDirective = DropZoneDirective;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(0);
+var file_1 = __webpack_require__(10);
 var InputFileComponent = (function () {
     /**
      * Creates an instance of InputFileComponent.
@@ -462,211 +590,80 @@ var InputFileComponent = (function () {
         var size = Math.round(inputFile.size / 1024);
         file.size = '(' + size + ' KB)';
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "inputId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "inputAccept", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], InputFileComponent.prototype, "disableUpload", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], InputFileComponent.prototype, "inputMaxFiles", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], InputFileComponent.prototype, "model", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "textBrowse", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "textFileSelected", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "textNoFile", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "textRemove", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], InputFileComponent.prototype, "textUpload", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], InputFileComponent.prototype, "limitReached", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], InputFileComponent.prototype, "acceptedFile", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], InputFileComponent.prototype, "rejectedFile", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], InputFileComponent.prototype, "removedFile", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], InputFileComponent.prototype, "uploadFiles", void 0);
+    __decorate([
+        core_1.ViewChild('inputFile'),
+        __metadata("design:type", Object)
+    ], InputFileComponent.prototype, "inputFile", void 0);
+    InputFileComponent = __decorate([
+        core_1.Component({
+            selector: 'input-file',
+            template: "\n<div class=\"row input-file\" dropZone [disabled]=\"dropZoneDisabled\" (fileDragOver)=\"onFileDragOver()\" (fileDragLeave)=\"onFileDragLeave()\" (fileDrop)=\"onFileDrop($event)\">\n    <div class=\"col-12 drop-zone\" *ngIf=\"isDragOver\">\n        <div class=\"drop-zone-message\">\n        </div>\n    </div>\n    <div class=\"col-12\" *ngIf=\"isNotNullOrEmpty() && !isDragOver\">\n        <div class=\"file-preview\">\n            <button type=\"button\" class=\"close\" (click)=\"onRemove()\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <div class=\"file-preview-container\">\n                <div class=\"file-preview-item\" *ngFor=\"let file of model; let i = index\">\n                    <button type=\"button\" class=\"close\" (click)=\"onRemoveFile(i)\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <div class=\"file-content\">\n                        <img src=\"{{ file.icon }}\" *ngIf=\"file.icon\"> \n                    </div>\n                    <div class=\"file-thumbnail-footer\">\n                        <div class=\"file-footer-caption\" *ngIf=\"file.file\">\n                            <p>{{ file.file.name }}</p>\n                            <samp>{{ file.size }}</samp>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-12 input-group file-caption-main\" *ngIf=\"!isDragOver\">\n        <div class=\"form-control\" [ngClass]=\"{'input-active': isInputActive}\">\n            <div class=\"file-caption-name\" tabindex=\"500\">\n                <i class=\"fa fa-file-o\" aria-hidden=\"true\" *ngIf=\"isNotNullOrEmpty()\"></i>\n                <span>{{ getInputText() }}</span>\n            </div>\n        </div>\n        <span class=\"input-group-btn\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Clear selected files\" tabindex=\"500\" (click)=\"onRemove()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>  \n                <span class=\"d-none d-md-block\">{{ textRemove }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\" *ngIf=\"!disableUpload\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Upload selected files\" tabindex=\"500\" (click)=\"onUpload()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-cloud-upload\" aria-hidden=\"true\"></i>  \n                <span class=\"d-none d-md-block\">{{ textUpload }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\">\n            <div class=\"btn btn-primary btn-file\" tabindex=\"500\" [ngClass]=\"{'disabled': dropZoneDisabled}\">\n                <i class=\"fa fa-folder-open-o\" aria-hidden=\"true\"></i>\n                <span class=\"d-none d-md-block\">{{ textBrowse\u00A0}}</span>\n                <input id=\"{{ inputId }}\" class=\"file\" name=\"input-file-name\" type=\"file\" \n                    accept=\"{{ inputAccept }}\" \n                    [attr.multiple]=\"inputMaxFiles > 1 ? true : null\" \n                    [disabled]=\"dropZoneDisabled\"\n                    (change)=\"onChange($event)\" \n                    (blur)=\"onBlur()\" \n                    (focus)=\"onFocus()\" \n                    #inputFile>\n            </div>\n        </span>\n    </div>\n</div>"
+        }),
+        __metadata("design:paramtypes", [])
+    ], InputFileComponent);
     return InputFileComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "inputId", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "inputAccept", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], InputFileComponent.prototype, "disableUpload", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], InputFileComponent.prototype, "inputMaxFiles", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], InputFileComponent.prototype, "model", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textBrowse", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textFileSelected", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textNoFile", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textRemove", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], InputFileComponent.prototype, "textUpload", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "limitReached", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "acceptedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "rejectedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "removedFile", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], InputFileComponent.prototype, "uploadFiles", void 0);
-__decorate([
-    core_1.ViewChild('inputFile'),
-    __metadata("design:type", Object)
-], InputFileComponent.prototype, "inputFile", void 0);
-InputFileComponent = __decorate([
-    core_1.Component({
-        selector: 'input-file',
-        template: "\n<div class=\"row input-file\" dropZone [disabled]=\"dropZoneDisabled\" (fileDragOver)=\"onFileDragOver()\" (fileDragLeave)=\"onFileDragLeave()\" (fileDrop)=\"onFileDrop($event)\">\n    <div class=\"col-12 drop-zone\" *ngIf=\"isDragOver\">\n        <div class=\"drop-zone-message\">\n        </div>\n    </div>\n    <div class=\"col-12\" *ngIf=\"isNotNullOrEmpty() && !isDragOver\">\n        <div class=\"file-preview\">\n            <button type=\"button\" class=\"close\" (click)=\"onRemove()\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <div class=\"file-preview-container\">\n                <div class=\"file-preview-item\" *ngFor=\"let file of model; let i = index\">\n                    <button type=\"button\" class=\"close\" (click)=\"onRemoveFile(i)\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <div class=\"file-content\">\n                        <img src=\"{{ file.icon }}\" *ngIf=\"file.icon\"> \n                    </div>\n                    <div class=\"file-thumbnail-footer\">\n                        <div class=\"file-footer-caption\" *ngIf=\"file.file\">\n                            <p>{{ file.file.name }}</p>\n                            <samp>{{ file.size }}</samp>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-12 input-group file-caption-main\" *ngIf=\"!isDragOver\">\n        <div class=\"form-control\" [ngClass]=\"{'input-active': isInputActive}\">\n            <div class=\"file-caption-name\" tabindex=\"500\">\n                <i class=\"fa fa-file-o\" aria-hidden=\"true\" *ngIf=\"isNotNullOrEmpty()\"></i>\n                <span>{{ getInputText() }}</span>\n            </div>\n        </div>\n        <span class=\"input-group-btn\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Clear selected files\" tabindex=\"500\" (click)=\"onRemove()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textRemove }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\" *ngIf=\"!disableUpload\">\n            <button class=\"btn btn-secondary btn-action\" type=\"button\" title=\"Upload selected files\" tabindex=\"500\" (click)=\"onUpload()\" *ngIf=\"isNotNullOrEmpty()\">\n                <i class=\"fa fa-cloud-upload\" aria-hidden=\"true\"></i>  \n                <span class=\"hidden-xs-down\">{{ textUpload }}</span>\n            </button>\n        </span>\n        <span class=\"input-group-btn\">\n            <div class=\"btn btn-primary btn-file\" tabindex=\"500\" [ngClass]=\"{'disabled': dropZoneDisabled}\">\n                <i class=\"fa fa-folder-open-o\" aria-hidden=\"true\"></i>\n                <span class=\"hidden-xs-down\">{{ textBrowse\u00A0}}</span>\n                <input id=\"{{ inputId }}\" class=\"file\" name=\"input-file-name\" type=\"file\" \n                    accept=\"{{ inputAccept }}\" \n                    [attr.multiple]=\"inputMaxFiles > 1 ? true : null\" \n                    [disabled]=\"dropZoneDisabled\"\n                    (change)=\"onChange($event)\" \n                    (blur)=\"onBlur()\" \n                    (focus)=\"onFocus()\" \n                    #inputFile>\n            </div>\n        </span>\n    </div>\n</div>"
-    }),
-    __metadata("design:paramtypes", [])
-], InputFileComponent);
 exports.InputFileComponent = InputFileComponent;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(0);
-var DropZoneDirective = (function () {
-    /**
-     * Creates an instance of DropZoneDirective.
-     *
-     * @memberOf DropZoneDirective
-     */
-    function DropZoneDirective() {
-        this.disabled = false;
-        this.fileDragOver = new core_1.EventEmitter();
-        this.fileDragLeave = new core_1.EventEmitter();
-        this.fileDrop = new core_1.EventEmitter();
-        this.isDragOverDisabled = false;
-    }
-    // Events ----------------------------------------------------------------
-    /**
-     * Drag Over event handler.
-     *
-     * @param {Event} event The event.
-     *
-     * @memberOf DropZoneDirective
-     */
-    DropZoneDirective.prototype.onDragOver = function (event) {
-        this.preventAndStopEventPropagation(event);
-        if (!this.isDragOverDisabled && !this.disabled) {
-            this.isDragOverDisabled = true;
-            this.fileDragOver.emit();
-        }
-    };
-    /**
-     * Drag Leave event handler.
-     *
-     * @param {Event} event The event.
-     *
-     * @memberOf DropZoneDirective
-     */
-    DropZoneDirective.prototype.onDragLeave = function (event) {
-        this.preventAndStopEventPropagation(event);
-        if (this.isDragOverDisabled && !this.disabled) {
-            this.isDragOverDisabled = false;
-            this.fileDragLeave.emit();
-        }
-    };
-    /**
-     * Drop event handler.
-     *
-     * @param {*} event The event.
-     *
-     * @memberOf DropZoneDirective
-     */
-    DropZoneDirective.prototype.onDrop = function (event) {
-        if (!this.disabled) {
-            this.isDragOverDisabled = false;
-            this.preventAndStopEventPropagation(event);
-            this.fileDrop.emit(event.dataTransfer.files);
-        }
-    };
-    // Private ---------------------------------------------------------------
-    /**
-     * Prevents and stops event propagration.
-     *
-     * @private
-     * @param {Event} event The event.
-     *
-     * @memberOf DropZoneDirective
-     */
-    DropZoneDirective.prototype.preventAndStopEventPropagation = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    };
-    return DropZoneDirective;
-}());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], DropZoneDirective.prototype, "disabled", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], DropZoneDirective.prototype, "fileDragOver", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], DropZoneDirective.prototype, "fileDragLeave", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], DropZoneDirective.prototype, "fileDrop", void 0);
-__decorate([
-    core_1.HostListener('dragover', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Event]),
-    __metadata("design:returntype", void 0)
-], DropZoneDirective.prototype, "onDragOver", null);
-__decorate([
-    core_1.HostListener('dragleave', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Event]),
-    __metadata("design:returntype", void 0)
-], DropZoneDirective.prototype, "onDragLeave", null);
-__decorate([
-    core_1.HostListener('drop', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], DropZoneDirective.prototype, "onDrop", null);
-DropZoneDirective = __decorate([
-    core_1.Directive({
-        selector: '[dropZone]'
-    }),
-    __metadata("design:paramtypes", [])
-], DropZoneDirective);
-exports.DropZoneDirective = DropZoneDirective;
 
 
 /***/ }),
@@ -686,7 +683,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var Observable_1 = __webpack_require__(13);
+var Observable_1 = __webpack_require__(14);
 var InputFileRepository = (function () {
     function InputFileRepository() {
         this.postMethod = 'POST';
@@ -748,17 +745,39 @@ var InputFileRepository = (function () {
         formData.append("file", file.file, file.file.name);
         return formData;
     };
+    InputFileRepository = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], InputFileRepository);
     return InputFileRepository;
 }());
-InputFileRepository = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], InputFileRepository);
 exports.InputFileRepository = InputFileRepository;
 
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function isFunction(x) {
+    return typeof x === 'function';
+}
+exports.isFunction = isFunction;
+//# sourceMappingURL=isFunction.js.map
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// typeof any so that it we don't have to cast when comparing a result to the error object
+exports.errorObject = { e: {} };
+//# sourceMappingURL=errorObject.js.map
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -772,7 +791,7 @@ exports.empty = {
 //# sourceMappingURL=Observer.js.map
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,29 +807,41 @@ exports.$$rxSubscriber = exports.rxSubscriber;
 //# sourceMappingURL=rxSubscriber.js.map
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// typeof any so that it we don't have to cast when comparing a result to the error object
-exports.errorObject = { e: {} };
-//# sourceMappingURL=errorObject.js.map
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function isFunction(x) {
-    return typeof x === 'function';
-}
-exports.isFunction = isFunction;
-//# sourceMappingURL=isFunction.js.map
-
-/***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var drop_zone_directive_1 = __webpack_require__(2);
+exports.DropZoneDirective = drop_zone_directive_1.DropZoneDirective;
+var input_file_component_1 = __webpack_require__(3);
+exports.InputFileComponent = input_file_component_1.InputFileComponent;
+var input_file_module_1 = __webpack_require__(11);
+exports.InputFileModule = input_file_module_1.InputFileModule;
+var input_file_options_1 = __webpack_require__(24);
+exports.InputFileOptions = input_file_options_1.InputFileOptions;
+var input_file_repository_1 = __webpack_require__(4);
+exports.InputFileRepository = input_file_repository_1.InputFileRepository;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var File = (function () {
+    function File() {
+    }
+    return File;
+}());
+exports.File = File;
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -826,99 +857,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var forms_1 = __webpack_require__(23);
-var platform_browser_1 = __webpack_require__(24);
-var drop_zone_directive_1 = __webpack_require__(3);
-var input_file_component_1 = __webpack_require__(2);
+var forms_1 = __webpack_require__(12);
+var platform_browser_1 = __webpack_require__(13);
+var drop_zone_directive_1 = __webpack_require__(2);
+var input_file_component_1 = __webpack_require__(3);
 var input_file_repository_1 = __webpack_require__(4);
 var InputFileModule = (function () {
     function InputFileModule(inputFileRepository) {
         this.inputFileRepository = inputFileRepository;
     }
+    InputFileModule = __decorate([
+        core_1.NgModule({
+            declarations: [
+                drop_zone_directive_1.DropZoneDirective,
+                input_file_component_1.InputFileComponent
+            ],
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule
+            ],
+            exports: [
+                drop_zone_directive_1.DropZoneDirective,
+                input_file_component_1.InputFileComponent
+            ],
+            providers: [input_file_repository_1.InputFileRepository],
+            entryComponents: [input_file_component_1.InputFileComponent]
+        }),
+        __metadata("design:paramtypes", [input_file_repository_1.InputFileRepository])
+    ], InputFileModule);
     return InputFileModule;
 }());
-InputFileModule = __decorate([
-    core_1.NgModule({
-        declarations: [
-            drop_zone_directive_1.DropZoneDirective,
-            input_file_component_1.InputFileComponent
-        ],
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule
-        ],
-        exports: [
-            drop_zone_directive_1.DropZoneDirective,
-            input_file_component_1.InputFileComponent
-        ],
-        providers: [input_file_repository_1.InputFileRepository],
-        entryComponents: [input_file_component_1.InputFileComponent]
-    }),
-    __metadata("design:paramtypes", [input_file_repository_1.InputFileRepository])
-], InputFileModule);
 exports.InputFileModule = InputFileModule;
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var InputFileOptions = (function () {
-    function InputFileOptions(authToken, authTokenHeader) {
-        this.authToken = authToken;
-        this.authTokenHeader = authTokenHeader;
-    }
-    return InputFileOptions;
-}());
-exports.InputFileOptions = InputFileOptions;
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var File = (function () {
-    function File() {
-    }
-    return File;
-}());
-exports.File = File;
-
-
-/***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var drop_zone_directive_1 = __webpack_require__(3);
-exports.DropZoneDirective = drop_zone_directive_1.DropZoneDirective;
-var input_file_component_1 = __webpack_require__(2);
-exports.InputFileComponent = input_file_component_1.InputFileComponent;
-var input_file_module_1 = __webpack_require__(9);
-exports.InputFileModule = input_file_module_1.InputFileModule;
-var input_file_options_1 = __webpack_require__(10);
-exports.InputFileOptions = input_file_options_1.InputFileOptions;
-var input_file_repository_1 = __webpack_require__(4);
-exports.InputFileRepository = input_file_repository_1.InputFileRepository;
-
+module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var root_1 = __webpack_require__(1);
-var toSubscriber_1 = __webpack_require__(20);
-var observable_1 = __webpack_require__(16);
+var toSubscriber_1 = __webpack_require__(16);
+var observable_1 = __webpack_require__(23);
 /**
  * A representation of any set of values over any amount of time. This the most basic building block
  * of RxJS.
@@ -952,6 +944,120 @@ var Observable = (function () {
         observable.operator = operator;
         return observable;
     };
+    /**
+     * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+     *
+     * <span class="informal">Use it when you have all these Observables, but still nothing is happening.</span>
+     *
+     * `subscribe` is not a regular operator, but a method that calls Observables internal `subscribe` function. It
+     * might be for example a function that you passed to a {@link create} static factory, but most of the time it is
+     * a library implementation, which defines what and when will be emitted by an Observable. This means that calling
+     * `subscribe` is actually the moment when Observable starts its work, not when it is created, as it is often
+     * thought.
+     *
+     * Apart from starting the execution of an Observable, this method allows you to listen for values
+     * that an Observable emits, as well as for when it completes or errors. You can achieve this in two
+     * following ways.
+     *
+     * The first way is creating an object that implements {@link Observer} interface. It should have methods
+     * defined by that interface, but note that it should be just a regular JavaScript object, which you can create
+     * yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
+     * not attempt to use any RxJS implementation details to create Observers - you don't need them. Remember also
+     * that your object does not have to implement all methods. If you find yourself creating a method that doesn't
+     * do anything, you can simply omit it. Note however, that if `error` method is not provided, all errors will
+     * be left uncaught.
+     *
+     * The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
+     * This means you can provide three functions as arguments to `subscribe`, where first function is equivalent
+     * of a `next` method, second of an `error` method and third of a `complete` method. Just as in case of Observer,
+     * if you do not need to listen for something, you can omit a function, preferably by passing `undefined` or `null`,
+     * since `subscribe` recognizes these functions by where they were placed in function call. When it comes
+     * to `error` function, just as before, if not provided, errors emitted by an Observable will be thrown.
+     *
+     * Whatever style of calling `subscribe` you use, in both cases it returns a Subscription object.
+     * This object allows you to call `unsubscribe` on it, which in turn will stop work that an Observable does and will clean
+     * up all resources that an Observable used. Note that cancelling a subscription will not call `complete` callback
+     * provided to `subscribe` function, which is reserved for a regular completion signal that comes from an Observable.
+     *
+     * Remember that callbacks provided to `subscribe` are not guaranteed to be called asynchronously.
+     * It is an Observable itself that decides when these functions will be called. For example {@link of}
+     * by default emits all its values synchronously. Always check documentation for how given Observable
+     * will behave when subscribed and if its default behavior can be modified with a {@link Scheduler}.
+     *
+     * @example <caption>Subscribe with an Observer</caption>
+     * const sumObserver = {
+     *   sum: 0,
+     *   next(value) {
+     *     console.log('Adding: ' + value);
+     *     this.sum = this.sum + value;
+     *   },
+     *   error() { // We actually could just remote this method,
+     *   },        // since we do not really care about errors right now.
+     *   complete() {
+     *     console.log('Sum equals: ' + this.sum);
+     *   }
+     * };
+     *
+     * Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+     * .subscribe(sumObserver);
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Subscribe with functions</caption>
+     * let sum = 0;
+     *
+     * Rx.Observable.of(1, 2, 3)
+     * .subscribe(
+     *   function(value) {
+     *     console.log('Adding: ' + value);
+     *     sum = sum + value;
+     *   },
+     *   undefined,
+     *   function() {
+     *     console.log('Sum equals: ' + sum);
+     *   }
+     * );
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Cancel a subscription</caption>
+     * const subscription = Rx.Observable.interval(1000).subscribe(
+     *   num => console.log(num),
+     *   undefined,
+     *   () => console.log('completed!') // Will not be called, even
+     * );                                // when cancelling subscription
+     *
+     *
+     * setTimeout(() => {
+     *   subscription.unsubscribe();
+     *   console.log('unsubscribed!');
+     * }, 2500);
+     *
+     * // Logs:
+     * // 0 after 1s
+     * // 1 after 2s
+     * // "unsubscribed!" after 2,5s
+     *
+     *
+     * @param {Observer|Function} observerOrNext (optional) Either an observer with methods to be called,
+     *  or the first of three possible handlers, which is the handler for each value emitted from the subscribed
+     *  Observable.
+     * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
+     *  the error will be thrown as unhandled.
+     * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
+     * @return {ISubscription} a subscription reference to the registered handlers
+     * @method subscribe
+     */
     Observable.prototype.subscribe = function (observerOrNext, error, complete) {
         var operator = this.operator;
         var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
@@ -959,7 +1065,7 @@ var Observable = (function () {
             operator.call(sink, this.source);
         }
         else {
-            sink.add(this._trySubscribe(sink));
+            sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
         }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
@@ -1059,7 +1165,60 @@ exports.Observable = Observable;
 //# sourceMappingURL=Observable.js.map
 
 /***/ }),
-/* 14 */
+/* 15 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Subscriber_1 = __webpack_require__(17);
+var rxSubscriber_1 = __webpack_require__(8);
+var Observer_1 = __webpack_require__(7);
+function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver) {
+        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+            return nextOrObserver;
+        }
+        if (nextOrObserver[rxSubscriber_1.rxSubscriber]) {
+            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+        }
+    }
+    if (!nextOrObserver && !error && !complete) {
+        return new Subscriber_1.Subscriber(Observer_1.empty);
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+}
+exports.toSubscriber = toSubscriber;
+//# sourceMappingURL=toSubscriber.js.map
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1069,10 +1228,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var isFunction_1 = __webpack_require__(8);
-var Subscription_1 = __webpack_require__(15);
-var Observer_1 = __webpack_require__(5);
-var rxSubscriber_1 = __webpack_require__(6);
+var isFunction_1 = __webpack_require__(5);
+var Subscription_1 = __webpack_require__(18);
+var Observer_1 = __webpack_require__(7);
+var rxSubscriber_1 = __webpack_require__(8);
 /**
  * Implements the {@link Observer} interface and extends the
  * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -1329,17 +1488,17 @@ var SafeSubscriber = (function (_super) {
 //# sourceMappingURL=Subscriber.js.map
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var isArray_1 = __webpack_require__(18);
-var isObject_1 = __webpack_require__(19);
-var isFunction_1 = __webpack_require__(8);
+var isArray_1 = __webpack_require__(19);
+var isObject_1 = __webpack_require__(20);
+var isFunction_1 = __webpack_require__(5);
 var tryCatch_1 = __webpack_require__(21);
-var errorObject_1 = __webpack_require__(7);
-var UnsubscriptionError_1 = __webpack_require__(17);
+var errorObject_1 = __webpack_require__(6);
+var UnsubscriptionError_1 = __webpack_require__(22);
 /**
  * Represents a disposable resource, such as the execution of an Observable. A
  * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -1528,7 +1687,84 @@ function flattenUnsubscriptionErrors(errors) {
 //# sourceMappingURL=Subscription.js.map
 
 /***/ }),
-/* 16 */
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+//# sourceMappingURL=isArray.js.map
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function isObject(x) {
+    return x != null && typeof x === 'object';
+}
+exports.isObject = isObject;
+//# sourceMappingURL=isObject.js.map
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var errorObject_1 = __webpack_require__(6);
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+//# sourceMappingURL=tryCatch.js.map
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when one or more errors have occurred during the
+ * `unsubscribe` of a {@link Subscription}.
+ */
+var UnsubscriptionError = (function (_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+        _super.call(this);
+        this.errors = errors;
+        var err = Error.call(this, errors ?
+            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+        this.name = err.name = 'UnsubscriptionError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return UnsubscriptionError;
+}(Error));
+exports.UnsubscriptionError = UnsubscriptionError;
+//# sourceMappingURL=UnsubscriptionError.js.map
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1560,146 +1796,21 @@ exports.$$observable = exports.observable;
 //# sourceMappingURL=observable.js.map
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-/**
- * An error thrown when one or more errors have occurred during the
- * `unsubscribe` of a {@link Subscription}.
- */
-var UnsubscriptionError = (function (_super) {
-    __extends(UnsubscriptionError, _super);
-    function UnsubscriptionError(errors) {
-        _super.call(this);
-        this.errors = errors;
-        var err = Error.call(this, errors ?
-            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
-        this.name = err.name = 'UnsubscriptionError';
-        this.stack = err.stack;
-        this.message = err.message;
-    }
-    return UnsubscriptionError;
-}(Error));
-exports.UnsubscriptionError = UnsubscriptionError;
-//# sourceMappingURL=UnsubscriptionError.js.map
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
-//# sourceMappingURL=isArray.js.map
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function isObject(x) {
-    return x != null && typeof x === 'object';
-}
-exports.isObject = isObject;
-//# sourceMappingURL=isObject.js.map
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Subscriber_1 = __webpack_require__(14);
-var rxSubscriber_1 = __webpack_require__(6);
-var Observer_1 = __webpack_require__(5);
-function toSubscriber(nextOrObserver, error, complete) {
-    if (nextOrObserver) {
-        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
-            return nextOrObserver;
-        }
-        if (nextOrObserver[rxSubscriber_1.rxSubscriber]) {
-            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
-        }
-    }
-    if (!nextOrObserver && !error && !complete) {
-        return new Subscriber_1.Subscriber(Observer_1.empty);
-    }
-    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
-}
-exports.toSubscriber = toSubscriber;
-//# sourceMappingURL=toSubscriber.js.map
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var errorObject_1 = __webpack_require__(7);
-var tryCatchTarget;
-function tryCatcher() {
-    try {
-        return tryCatchTarget.apply(this, arguments);
-    }
-    catch (e) {
-        errorObject_1.errorObject.e = e;
-        return errorObject_1.errorObject;
-    }
-}
-function tryCatch(fn) {
-    tryCatchTarget = fn;
-    return tryCatcher;
-}
-exports.tryCatch = tryCatch;
-;
-//# sourceMappingURL=tryCatch.js.map
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
-
-/***/ }),
 /* 24 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_24__;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var InputFileOptions = (function () {
+    function InputFileOptions(authToken, authTokenHeader) {
+        this.authToken = authToken;
+        this.authTokenHeader = authTokenHeader;
+    }
+    return InputFileOptions;
+}());
+exports.InputFileOptions = InputFileOptions;
+
 
 /***/ })
 /******/ ]);

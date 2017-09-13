@@ -1,6 +1,6 @@
 {
   "name": "ngx-input-file",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Angular Input File Component",
   "main": "dist/input-file.umd.js",
   "module": "dist/index.js",

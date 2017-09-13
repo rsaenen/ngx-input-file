@@ -70,23 +70,23 @@ var DropZoneDirective = (function () {
         event.preventDefault();
         event.stopPropagation();
     };
+    DropZoneDirective.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[dropZone]'
+                },] },
+    ];
+    /** @nocollapse */
+    DropZoneDirective.ctorParameters = function () { return []; };
+    DropZoneDirective.propDecorators = {
+        'disabled': [{ type: core_1.Input },],
+        'fileDragOver': [{ type: core_1.Output },],
+        'fileDragLeave': [{ type: core_1.Output },],
+        'fileDrop': [{ type: core_1.Output },],
+        'onDragOver': [{ type: core_1.HostListener, args: ['dragover', ['$event'],] },],
+        'onDragLeave': [{ type: core_1.HostListener, args: ['dragleave', ['$event'],] },],
+        'onDrop': [{ type: core_1.HostListener, args: ['drop', ['$event'],] },],
+    };
     return DropZoneDirective;
 }());
-DropZoneDirective.decorators = [
-    { type: core_1.Directive, args: [{
-                selector: '[dropZone]'
-            },] },
-];
-/** @nocollapse */
-DropZoneDirective.ctorParameters = function () { return []; };
-DropZoneDirective.propDecorators = {
-    'disabled': [{ type: core_1.Input },],
-    'fileDragOver': [{ type: core_1.Output },],
-    'fileDragLeave': [{ type: core_1.Output },],
-    'fileDrop': [{ type: core_1.Output },],
-    'onDragOver': [{ type: core_1.HostListener, args: ['dragover', ['$event'],] },],
-    'onDragLeave': [{ type: core_1.HostListener, args: ['dragleave', ['$event'],] },],
-    'onDrop': [{ type: core_1.HostListener, args: ['drop', ['$event'],] },],
-};
 exports.DropZoneDirective = DropZoneDirective;
 //# sourceMappingURL=drop-zone.directive.js.map

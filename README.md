@@ -2,7 +2,7 @@
 
 **ngx-input-file** is a module to replace the html element input file and also allows you to upload files.  
 Style is based on [Bootstrap File Input](http://plugins.krajee.com/file-input/demo).  
-The component is compatible with [Bootstrap 4](https://v4-alpha.getbootstrap.com/).
+The component is compatible with [Bootstrap 4 beta](https://getbootstrap.com/).
 
 ![Input File screenshot](http://img4.hostingpics.net/pics/626115inputfile1.png)
 
@@ -119,7 +119,7 @@ public post(file: any): Observable<Image> {
 ## IMPORTANT!
 Icons is not packaged with the module.  
 Default path of file icons is `assets/img` with the extension `.png`.  
-Please use (@angular/cli)[https://cli.angular.io/], `ng new ...` manages the folder `assets`.  
+Please use (angular cli)[https://cli.angular.io/], `ng new ...` manages the folder `assets`.  
 Any help is welcome to package icons or configure the path and extension.
 You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=2&price=free).
 

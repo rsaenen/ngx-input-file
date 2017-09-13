@@ -10,29 +10,29 @@ var InputFileModule = (function () {
     function InputFileModule(inputFileRepository) {
         this.inputFileRepository = inputFileRepository;
     }
+    InputFileModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    declarations: [
+                        drop_zone_directive_1.DropZoneDirective,
+                        input_file_component_1.InputFileComponent
+                    ],
+                    imports: [
+                        platform_browser_1.BrowserModule,
+                        forms_1.FormsModule
+                    ],
+                    exports: [
+                        drop_zone_directive_1.DropZoneDirective,
+                        input_file_component_1.InputFileComponent
+                    ],
+                    providers: [input_file_repository_1.InputFileRepository],
+                    entryComponents: [input_file_component_1.InputFileComponent]
+                },] },
+    ];
+    /** @nocollapse */
+    InputFileModule.ctorParameters = function () { return [
+        { type: input_file_repository_1.InputFileRepository, },
+    ]; };
     return InputFileModule;
 }());
-InputFileModule.decorators = [
-    { type: core_1.NgModule, args: [{
-                declarations: [
-                    drop_zone_directive_1.DropZoneDirective,
-                    input_file_component_1.InputFileComponent
-                ],
-                imports: [
-                    platform_browser_1.BrowserModule,
-                    forms_1.FormsModule
-                ],
-                exports: [
-                    drop_zone_directive_1.DropZoneDirective,
-                    input_file_component_1.InputFileComponent
-                ],
-                providers: [input_file_repository_1.InputFileRepository],
-                entryComponents: [input_file_component_1.InputFileComponent]
-            },] },
-];
-/** @nocollapse */
-InputFileModule.ctorParameters = function () { return [
-    { type: input_file_repository_1.InputFileRepository, },
-]; };
 exports.InputFileModule = InputFileModule;
 //# sourceMappingURL=input-file.module.js.map

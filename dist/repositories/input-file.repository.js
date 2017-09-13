@@ -63,12 +63,12 @@ var InputFileRepository = (function () {
         formData.append("file", file.file, file.file.name);
         return formData;
     };
+    InputFileRepository.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /** @nocollapse */
+    InputFileRepository.ctorParameters = function () { return []; };
     return InputFileRepository;
 }());
-InputFileRepository.decorators = [
-    { type: core_1.Injectable },
-];
-/** @nocollapse */
-InputFileRepository.ctorParameters = function () { return []; };
 exports.InputFileRepository = InputFileRepository;
 //# sourceMappingURL=input-file.repository.js.map
