@@ -1,10 +1,7 @@
 {
   "name": "ngx-input-file",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Angular Input File Component",
-  "main": "bundles/ngx-input-file.umd.js",
-  "module": "ngx-input-file/ngx-input-file.es5.js",
-  "typings": "ngx-input-file.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -71,6 +68,9 @@
     "bootstrap",
     "upload"
   ],
+  "main": "bundles/ngx-input-file.umd.js",
+  "module": "ngx-input-file/ngx-input-file.es5.js",
   "es2015": "ngx-input-file/ngx-input-file.js",
+  "typings": "ngx-input-file.d.ts",
   "metadata": "ngx-input-file.metadata.json"
 }
