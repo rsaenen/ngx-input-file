@@ -116,3 +116,6 @@ You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=
 
 ## For developpers
 You're welcome, please fork this repository to a make pull request.
+
+### Demonstration
+Clone this repository and run `npm start`.
