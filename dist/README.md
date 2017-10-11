@@ -17,18 +17,9 @@ The component is compatible with [Bootstrap 4 beta](https://getbootstrap.com/).
 
 ## Installation 
 ```bash
-npm install ngx-input-file
+npm install ngx-input-file --save
 ```
 
-Include style to your `.angular-cli.json` or your `webpack` vendor. Example:
-```
-"styles": [
-    ...
-    "../node_modules/ngx-input-file/style/style.css",  
-    ... 
-],
-```
-  
 ## Basic Configuration (deprecated)
 The goal of this module is not to upload file but to provide a component to replace the html element input.  
 Create a new `ngx-input-file.module.ts` file with the following code:
@@ -125,3 +116,6 @@ You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=
 
 ## For developpers
 You're welcome, please fork this repository to a make pull request.
+
+### Demonstration
+Clone this repository and run `npm start`.
