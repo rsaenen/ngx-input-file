@@ -1,0 +1,11 @@
+<div class="row mt-5">
+    <div class="col-6 m-auto">
+        <input-file 
+            inputId="images" 
+            inputMaxFiles="3" 
+            [(model)]="inputFileModel"
+            (acceptedFile)="onAccept($event)"
+            (removedFile)="onRemove($event)">
+        </input-file> 
+    </div>
+</div>

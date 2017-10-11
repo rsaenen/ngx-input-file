@@ -1,0 +1,86 @@
+.input-file .drop-zone {
+    border: 1px dashed #66afe9;
+    border-radius: 5px;
+    background-image: url('../../assets/img/dropzone.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 128px;
+    height: 320px;
+    margin-bottom: 15px;
+  }
+  .input-file .drop-zone .drop-zone-message {
+    text-align: center;
+  }
+  .input-file .file-preview {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    overflow: auto;
+    padding: 5px;
+    width: 100%;
+  }
+  .input-file .file-preview .file-preview-item {
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+    display: table;
+    float: left;
+    margin: 8px;
+    padding: 6px;
+    position: relative;
+    text-align: center;
+  }
+  .input-file .file-preview .file-preview-item .file-content {
+    height: 170px;
+  }
+  .input-file .file-preview .file-preview-item .file-content img {
+    height: 160px;
+    width: auto;
+  }
+  .input-file .file-preview .file-preview-item .file-thumbnail-footer {
+    height: 70px;
+    padding-top: 10px;
+  }
+  .input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {
+    color: #777;
+    display: block;
+    font-size: 11px;
+    margin: 5px auto;
+    overflow: hidden;
+    padding-top: 4px;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 160px;
+    white-space: nowrap;
+  }
+  .input-file .file-preview .file-preview-item:hover {
+    box-shadow: 3px 3px 5px 0 #333;
+  }
+  .input-file .file-caption-main {
+    width: 100%;
+  }
+  .input-file .file-caption-main .input-active {
+    background-color: #fff;
+    border-color: #5cb3fd;
+    color: #464a4c;
+    outline: 0;
+  }
+  .input-file .file-caption-main .file-caption-name:focus {
+    outline: 0;
+  }
+  .input-file .file-caption-main .form-control,
+  .input-file .file-caption-main .btn-action {
+    z-index: 10;
+  }
+  .input-file .file-caption-main .btn-file input[type=file] {
+    background: none;
+    cursor: inherit;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }
+  
