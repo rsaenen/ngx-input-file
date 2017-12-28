@@ -506,15 +506,12 @@ InputFileComponent.decorators = [
               </div>
               <ng-template #minimalInput>
                   <div class="col-12">
-                      <div class="btn btn-primary btn-file" [ngClass]="{'disabled': dropZoneDisabled}">
+                      <div class="btn btn-primary btn-file">
                           <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
                           <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
-                              accept="{{ inputAccept }}" 
-                              [attr.multiple]="inputMaxFiles > 1 ? true : null" 
-                              [disabled]="dropZoneDisabled"
-                              (change)="onChange($event)" 
-                              (blur)="onBlur()" 
-                              (focus)="onFocus()" 
+                              accept="{{ inputAccept }}"
+                              [attr.multiple]="inputMaxFiles > 1 ? true : null"
+                              (change)="onChange($event)"
                               #inputFile>
                       </div>
                   </div>
