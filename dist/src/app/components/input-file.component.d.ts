@@ -5,6 +5,7 @@ export declare class InputFileComponent {
     inputAccept: string;
     disableUpload: boolean;
     inputMaxFiles: number;
+    minimal: boolean;
     model: Array<File>;
     textBrowse: string;
     textFileSelected: string;

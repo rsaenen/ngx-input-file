@@ -9,3 +9,15 @@
         </input-file> 
     </div>
 </div>
+<div class="row mt-5">
+    <div class="col-6 m-auto">
+        <input-file 
+            inputId="images-minimal" 
+            inputMaxFiles="1" 
+            minimal="true"
+            [(model)]="inputFileMinimalModel"
+            (acceptedFile)="onAccept($event)"
+            (removedFile)="onRemove($event)">
+        </input-file> 
+    </div>
+</div>

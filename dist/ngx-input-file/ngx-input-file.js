@@ -83,6 +83,7 @@ class InputFileComponent {
     constructor() {
         this.disableUpload = false;
         this.inputMaxFiles = 1;
+        this.minimal = false;
         this.model = new Array();
         this.textBrowse = 'Browse';
         this.textFileSelected = 'files selected';
@@ -360,26 +361,23 @@ InputFileComponent.decorators = [
                 selector: 'input-file',
                 styles: [`
       .input-file .drop-zone {
-          border: 1px dashed #66afe9;
-          border-radius: 5px;
-          background-image: url('../../assets/img/dropzone.png');
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: 128px;
-          height: 320px;
-          margin-bottom: 15px;
-        }
-        .input-file .drop-zone .drop-zone-message {
-          text-align: center;
-        }
-        .input-file .file-preview {
-          border-radius: 5px;
-          border: 1px solid #ddd;
-          margin-bottom: 5px;
-          overflow: auto;
-          padding: 5px;
-          width: 100%;
-        }
+        border: 1px dashed #a2958a;
+        border-radius: 5px;
+        height: 320px;
+        text-align: center; }
+
+      .input-file .drop-zone-minimal {
+        border: 1px dashed #a2958a;
+        border-radius: 5px;
+        height: 38px; }
+
+      .input-file .file-preview {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        overflow: auto;
+        padding: 5px;
+        width: 100%; }
         .input-file .file-preview .file-preview-item {
           border: 1px solid #ddd;
           -webkit-box-shadow: 1px 1px 5px 0 #a2958a;
@@ -389,128 +387,139 @@ InputFileComponent.decorators = [
           margin: 8px;
           padding: 6px;
           position: relative;
-          text-align: center;
-        }
-        .input-file .file-preview .file-preview-item .file-content {
-          height: 170px;
-        }
-        .input-file .file-preview .file-preview-item .file-content img {
-          height: 160px;
-          width: auto;
-        }
-        .input-file .file-preview .file-preview-item .file-thumbnail-footer {
-          height: 70px;
-          padding-top: 10px;
-        }
-        .input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {
-          color: #777;
-          display: block;
-          font-size: 11px;
-          margin: 5px auto;
-          overflow: hidden;
-          padding-top: 4px;
-          text-align: center;
-          text-overflow: ellipsis;
-          width: 160px;
-          white-space: nowrap;
-        }
-        .input-file .file-preview .file-preview-item:hover {
-          -webkit-box-shadow: 3px 3px 5px 0 #333;
-                  box-shadow: 3px 3px 5px 0 #333;
-        }
-        .input-file .file-caption-main {
-          width: 100%;
-        }
+          text-align: center; }
+          .input-file .file-preview .file-preview-item .file-content {
+            height: 170px; }
+            .input-file .file-preview .file-preview-item .file-content img {
+              height: 160px;
+              width: auto; }
+          .input-file .file-preview .file-preview-item .file-thumbnail-footer {
+            height: 70px;
+            padding-top: 10px; }
+            .input-file .file-preview .file-preview-item .file-thumbnail-footer .file-footer-caption {
+              color: #777;
+              display: block;
+              font-size: 11px;
+              margin: 5px auto;
+              overflow: hidden;
+              padding-top: 4px;
+              text-align: center;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 160px; }
+          .input-file .file-preview .file-preview-item:hover {
+            -webkit-box-shadow: 3px 3px 5px 0 #333;
+                    box-shadow: 3px 3px 5px 0 #333; }
+
+      .input-file .file-caption-main {
+        width: 100%; }
         .input-file .file-caption-main .input-active {
           background-color: #fff;
           border-color: #5cb3fd;
           color: #464a4c;
-          outline: 0;
-        }
-        .input-file .file-caption-main .file-caption-name:focus {
-          outline: 0;
-        }
+          outline: 0; }
+        .input-file .file-caption-main .file-caption-name :focus {
+          outline: 0; }
         .input-file .file-caption-main .form-control,
         .input-file .file-caption-main .btn-action {
-          z-index: 10;
-        }
-        .input-file .file-caption-main .btn-file input[type=file] {
-          background: none;
-          cursor: inherit;
-          display: block;
-          min-width: 100%;
-          min-height: 100%;
-          opacity: 0;
-          position: absolute;
-          right: 0;
-          text-align: right;
-          top: 0;
-        }
-  
+          z-index: 10; }
+
+      .input-file .btn-file input[type='file'] {
+        background: none;
+        cursor: inherit;
+        display: block;
+        min-height: 100%;
+        min-width: 100%;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        text-align: right;
+        top: 0; }
     `],
                 template: `
       <div class="row input-file" dropZone [disabled]="dropZoneDisabled" (fileDragOver)="onFileDragOver()" (fileDragLeave)="onFileDragLeave()" (fileDrop)="onFileDrop($event)">
-          <div class="col-12 drop-zone" *ngIf="isDragOver">
-              <div class="drop-zone-message">
+          <ng-container *ngIf="!minimal; else minimalButton">    
+              <div class="col-12" *ngIf="isDragOver">
+                  <div class="drop-zone"></div>
               </div>
-          </div>
-          <div class="col-12" *ngIf="isNotNullOrEmpty() && !isDragOver">
-              <div class="file-preview">
-                  <button type="button" class="close" (click)="onRemove()">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  <div class="file-preview-container">
-                      <div class="file-preview-item" *ngFor="let file of model; let i = index">
-                          <button type="button" class="close" (click)="onRemoveFile(i)">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                          <div class="file-content">
-                              <img src="{{ file.icon }}" *ngIf="file.icon"> 
-                          </div>
-                          <div class="file-thumbnail-footer">
-                              <div class="file-footer-caption" *ngIf="file.file">
-                                  <p>{{ file.file.name }}</p>
-                                  <samp>{{ file.size }}</samp>
+              <div class="col-12" *ngIf="isNotNullOrEmpty() && !isDragOver">
+                  <div class="file-preview">
+                      <button type="button" class="close" (click)="onRemove()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      <div class="file-preview-container">
+                          <div class="file-preview-item" *ngFor="let file of model; let i = index">
+                              <button type="button" class="close" (click)="onRemoveFile(i)">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                              <div class="file-content">
+                                  <img src="{{ file.icon }}" *ngIf="file.icon"> 
+                              </div>
+                              <div class="file-thumbnail-footer">
+                                  <div class="file-footer-caption" *ngIf="file.file">
+                                      <p>{{ file.file.name }}</p>
+                                      <samp>{{ file.size }}</samp>
+                                  </div>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
-          </div>
-          <div class="col-12 input-group file-caption-main" *ngIf="!isDragOver">
-              <div class="form-control" [ngClass]="{'input-active': isInputActive}">
-                  <div class="file-caption-name" tabindex="500">
-                      <i class="fa fa-file-o" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
-                      <span>{{ getInputText() }}</span>
+              <div class="col-12 input-group file-caption-main" *ngIf="!isDragOver">
+                  <div class="form-control" [ngClass]="{'input-active': isInputActive}">
+                      <div class="file-caption-name" tabindex="500">
+                          <i class="fa fa-file-o" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
+                          <span>{{ getInputText() }}</span>
+                      </div>
                   </div>
+                  <span class="input-group-btn">
+                      <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>  
+                          <span class="d-none d-md-inline-flex">{{ textRemove }}</span>
+                      </button>
+                  </span>
+                  <span class="input-group-btn" *ngIf="!disableUpload">
+                      <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
+                          <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
+                          <span class="d-none d-md-inline-flex">{{ textUpload }}</span>
+                      </button>
+                  </span>
+                  <span class="input-group-btn">
+                      <div class="btn btn-primary btn-file" [ngClass]="{'disabled': dropZoneDisabled}">
+                          <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                          <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
+                          <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
+                              accept="{{ inputAccept }}" 
+                              [attr.multiple]="inputMaxFiles > 1 ? true : null" 
+                              [disabled]="dropZoneDisabled"
+                              (change)="onChange($event)" 
+                              (blur)="onBlur()" 
+                              (focus)="onFocus()" 
+                              #inputFile>
+                      </div>
+                  </span>
               </div>
-              <span class="input-group-btn">
-                  <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" tabindex="500" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
-                      <i class="fa fa-trash-o" aria-hidden="true"></i>  
-                      <span class="d-none d-md-inline-flex">{{ textRemove }}</span>
-                  </button>
-              </span>
-              <span class="input-group-btn" *ngIf="!disableUpload">
-                  <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" tabindex="500" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
-                      <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
-                      <span class="d-none d-md-inline-flex">{{ textUpload }}</span>
-                  </button>
-              </span>
-              <span class="input-group-btn">
-                  <div class="btn btn-primary btn-file" tabindex="500" [ngClass]="{'disabled': dropZoneDisabled}">
-                      <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                      <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
-                      <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
-                          accept="{{ inputAccept }}" 
-                          [attr.multiple]="inputMaxFiles > 1 ? true : null" 
-                          [disabled]="dropZoneDisabled"
-                          (change)="onChange($event)" 
-                          (blur)="onBlur()" 
-                          (focus)="onFocus()" 
-                          #inputFile>
+          </ng-container>
+          <ng-template #minimalButton>
+              <div class="col-12" *ngIf="isDragOver; else minimalInput">
+                  <div class="drop-zone-minimal"></div>
+              </div>
+              <ng-template #minimalInput>
+                  <div class="col-12">
+                      <div class="btn btn-primary btn-file" [ngClass]="{'disabled': dropZoneDisabled}">
+                          <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
+                          <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
+                              accept="{{ inputAccept }}" 
+                              [attr.multiple]="inputMaxFiles > 1 ? true : null" 
+                              [disabled]="dropZoneDisabled"
+                              (change)="onChange($event)" 
+                              (blur)="onBlur()" 
+                              (focus)="onFocus()" 
+                              #inputFile>
+                      </div>
                   </div>
-              </span>
-          </div>
+              </ng-template>
+          </ng-template>
       </div>
     `
             },] },
@@ -524,6 +533,7 @@ InputFileComponent.propDecorators = {
     'inputAccept': [{ type: Input },],
     'disableUpload': [{ type: Input },],
     'inputMaxFiles': [{ type: Input },],
+    'minimal': [{ type: Input },],
     'model': [{ type: Input },],
     'textBrowse': [{ type: Input },],
     'textFileSelected': [{ type: Input },],

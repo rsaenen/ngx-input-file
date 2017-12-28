@@ -4,7 +4,7 @@ import { File } from '../dto/file';
 
 @Component ({
     selector: 'input-file',
-    styleUrls: ['input-file.component.css'],
+    styleUrls: ['input-file.component.scss'],
     templateUrl: 'input-file.component.html'
 })
 
@@ -15,6 +15,7 @@ export class InputFileComponent {
     @Input() public inputAccept: string;
     @Input() public disableUpload = false;
     @Input() public inputMaxFiles = 1;
+    @Input() public minimal = false;
     @Input() public model: Array<File> = new Array<File>();
     @Input() public textBrowse = 'Browse';
     @Input() public textFileSelected = 'files selected';

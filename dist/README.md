@@ -52,7 +52,8 @@ Import this module in your module.
 | inputAccept           | string                | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
 | disableUpload         | boolean               | Default `false`. Hide the button upload. |
 | inputMaxFiles         | number                | Default `1`. The maximum files that the user can upload. |
-| model                 | Array<File>           | The model. |
+| minimal               | boolean               | Default `false`. If true, puts the input file to the minimal mode, a simple button browse without icon. |
+| model                 | Array<File>           | The model. 
 | textBrowse            | string                | Default `Browse`. The text of the button browse. |
 | textFileSelected      | string                | Default `files selected`. The text when x files is selected. |
 | textNoFile            | string                | Default `No file selected`. The text when no files is selected. |
