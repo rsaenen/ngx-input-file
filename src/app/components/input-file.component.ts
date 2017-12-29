@@ -198,7 +198,7 @@ export class InputFileComponent {
             }
         }
 
-        if (this.model.length >= limit) {
+        if (this.model.length >= limit && !this.minimal) {
             this.limitReachedHandler();
         }
     }

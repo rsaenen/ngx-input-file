@@ -248,7 +248,7 @@ var InputFileComponent = (function () {
                 break;
             }
         }
-        if (this.model.length >= limit) {
+        if (this.model.length >= limit && !this.minimal) {
             this.limitReachedHandler();
         }
     };

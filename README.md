@@ -65,6 +65,16 @@ Import this module in your module.
 | removedFile           | EventEmitter<File>    | Triggered when a file is removed. |
 | uploadFiles           | EventEmitter<any>     | Triggered when the user click on the button upload. |
 
+### Minimal Mode Attributes
+| Attribute             | Type          | Description                               |
+| --------------------- |:-------------:| :---------------------------------------- |
+| inputId               | string                | The attribute identifier of the html element input. |
+| inputAccept           | string                | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
+| model                 | Array<File>           | The model. 
+| textBrowse            | string                | Default `Browse`. The text of the button browse. |
+| acceptedFile          | EventEmitter<File>    | Triggered when a file is accepted. |
+| rejectedFile          | EventEmitter<File>    | Triggered when a file is rejected. |
+
 ## Supported icons
 The type is the mime type of the file.  
 The extension is a shortly example of the file extension.
