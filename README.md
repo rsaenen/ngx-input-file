@@ -5,8 +5,7 @@ See below how to upload a file.
 # ngx-input-file
 
 **ngx-input-file** is a module to replace the html element input file and also allows you to upload files.  
-Style is based on [Bootstrap File Input](http://plugins.krajee.com/file-input/demo).  
-The component is compatible with [Bootstrap 4](https://getbootstrap.com/).
+Style is based on [Bootstrap File Input](http://plugins.krajee.com/file-input/demo).
 
 ![Input File screenshot](http://img4.hostingpics.net/pics/626115inputfile1.png)
 
@@ -16,6 +15,7 @@ The component is compatible with [Bootstrap 4](https://getbootstrap.com/).
  - Preview of the file
  - Drag and drop zone
  - Responsive
+ - [Bootstrap 4.0.0](https://getbootstrap.com/) required.
  - [Font Awesome](http://fontawesome.io/) support
 
 ## Installation 
@@ -30,13 +30,17 @@ import { InputFileModule } from 'ngx-input-file';
 
 
 @NgModule({
-    imports: [ InputFileModule ],
-    exports: [ InputFileModule ]
+    imports: [
+        ... 
+        InputFileModule,
+        ...
+    ],
+    ...
 })
 
 export class MyModule {}
 ```
-Import this module in your module.
+Import `InputFileModule` in your module.
 
 ## Component Attributes
 | Attribute             | Type          | Description                               |
