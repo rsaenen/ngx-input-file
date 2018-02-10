@@ -33,19 +33,19 @@
                     <span>{{ getInputText() }}</span>
                 </div>
             </div>
-            <span class="input-group-btn">
+            <div class="input-group-append">
                 <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>  
                     <span class="d-none d-md-inline-flex">{{ textRemove }}</span>
                 </button>
-            </span>
-            <span class="input-group-btn" *ngIf="!disableUpload">
+            </div>
+            <div class="input-group-append" *ngIf="!disableUpload">
                 <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
                     <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
                     <span class="d-none d-md-inline-flex">{{ textUpload }}</span>
                 </button>
-            </span>
-            <span class="input-group-btn">
+            </div>
+            <div class="input-group-append">
                 <div class="btn btn-primary btn-file" [ngClass]="{'disabled': dropZoneDisabled}">
                     <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                     <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
@@ -58,7 +58,7 @@
                         (focus)="onFocus()" 
                         #inputFile>
                 </div>
-            </span>
+            </div>
         </div>
     </ng-container>
     <ng-template #minimalButton>

@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DropZoneDirective } from './directives/drop-zone.directive';
+import { HttpClientModule } from '@angular/common/http';
 import { InputFileComponent } from './components/input-file.component';
-import { InputFileOptions } from './utils/input-file.options';
-import { InputFileRepository } from './repositories/input-file.repository';
 
 @NgModule({
     declarations: [
@@ -13,16 +12,15 @@ import { InputFileRepository } from './repositories/input-file.repository';
     ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
     exports : [
         DropZoneDirective,
         InputFileComponent
     ],
-    providers: [ InputFileRepository ],
+    providers: [ ],
     entryComponents: [ InputFileComponent ]
 })
 
-export class InputFileModule {
-    constructor (public inputFileRepository?: InputFileRepository) {}
-}
+export class InputFileModule {}

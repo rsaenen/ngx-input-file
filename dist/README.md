@@ -1,8 +1,12 @@
+## Breaking changes
+Input file repository dropped.    
+See below how to upload a file.
+
 # ngx-input-file
 
 **ngx-input-file** is a module to replace the html element input file and also allows you to upload files.  
 Style is based on [Bootstrap File Input](http://plugins.krajee.com/file-input/demo).  
-The component is compatible with [Bootstrap 4 beta](https://getbootstrap.com/).
+The component is compatible with [Bootstrap 4](https://getbootstrap.com/).
 
 ![Input File screenshot](http://img4.hostingpics.net/pics/626115inputfile1.png)
 
@@ -13,35 +17,24 @@ The component is compatible with [Bootstrap 4 beta](https://getbootstrap.com/).
  - Drag and drop zone
  - Responsive
  - [Font Awesome](http://fontawesome.io/) support
- - Uploads files with headers like `Authorization` (deprecated, other modules uploads files better than this one)
 
 ## Installation 
 ```bash
 npm install ngx-input-file --save
 ```
 
-## Basic Configuration (deprecated)
-The goal of this module is not to upload file but to provide a component to replace the html element input.  
-Create a new `ngx-input-file.module.ts` file with the following code:
-```ts
+## Basic Configuration
+```typescript
 import { NgModule } from '@angular/core';
-import { InputFileModule, InputFileOptions, InputFileRepository } from 'ngx-input-file';
+import { InputFileModule } from 'ngx-input-file';
 
-const options: InputFileOptions = new InputFileOptions(
-    'auth-token-value',
-    'Authorization'
-);
 
 @NgModule({
     imports: [ InputFileModule ],
     exports: [ InputFileModule ]
 })
 
-export class NgxInputFileModule {
-    constructor(private repository: InputFileRepository) {
-        repository.setOptions(options);
-    }
-}
+export class MyModule {}
 ```
 Import this module in your module.
 
@@ -104,24 +97,29 @@ To add an other type, please open a issue.
     (removedFile)="onRemoveImage($event)">
 </input-file> 
 ```
-
+Here's an example to post a file:
 ```ts
-import { InputFileRepository } from 'ngx-input-file';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
+export class MyRepository {
 
 constructor(
-    public inputFileRepository: InputFileRepository) 
-{}
+    private http: HttpClient
+) {}
 
-public post(file: any): Observable<Image> {
-    const apiUrl = 'http://dumb.any/api/files';
-    return this.inputFileRepository.post(file, apiUrl);
+public post(file: any): Observable<any> {
+    const apiUrl = 'my-url';
+    const formData = new FormData();
+    formData.append('file', file.file, file.file.name);
+    return this.http.post(apiUrl, formData)
+        .map(res => <any>res);
 }
 ```
 
 ## IMPORTANT!
 Icons is not packaged with the module.  
 Default path of file icons is `assets/img` with the extension `.png`.  
-Please use [@angular/cli](https://cli.angular.io/), `ng new ...` manages the folder `assets`.  
 Any help is welcome to package icons or configure the path and extension.
 You can pick icons free [here](https://www.iconfinder.com/search?q=File&license=2&price=free).
 
