@@ -135,4 +135,4 @@ Clone this repository and run `npm start`.
 
 ## Changelog
 ### 1.0.1 
-- Issue #3
+- Fix issue #3
