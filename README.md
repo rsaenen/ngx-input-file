@@ -132,3 +132,7 @@ You're welcome, please fork this repository to a make pull request.
 
 ### Demonstration
 Clone this repository and run `npm start`.
+
+## Changelog
+### 1.0.1 
+- Issue #3
