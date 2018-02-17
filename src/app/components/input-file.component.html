@@ -18,7 +18,7 @@
                         </div>
                         <div class="file-thumbnail-footer">
                             <div class="file-footer-caption" *ngIf="file.file">
-                                <p>{{ file.file.name }}</p>
+                                <p>{{ file.file?.name }}</p>
                                 <samp>{{ file.size }}</samp>
                             </div>
                         </div>
@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="col-12 input-group file-caption-main" *ngIf="!isDragOver">
-            <div class="form-control" [ngClass]="{'input-active': isInputActive}">
-                <div class="file-caption-name" tabindex="500">
+            <div class="form-control">
+                <div class="file-caption-name">
                     <i class="fa fa-file-o" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
                     <span>{{ getInputText() }}</span>
                 </div>

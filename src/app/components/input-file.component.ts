@@ -221,7 +221,7 @@ export class InputFileComponent {
             const accept = this.inputAccept.replace('*', '');
             const types = accept.split(',');
             for (const type of types) {
-                if (file.type.startsWith(type) || (type.charAt(0) === '.' && file.name.endsWith(type))) {
+                if (file.type.startsWith(type) || (type.charAt(0) === '.' && file.name != null && file.name.endsWith(type))) {
                     enabled = true;
                     break;
                 }
