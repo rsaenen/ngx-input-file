@@ -29,25 +29,25 @@
         <div class="col-12 input-group file-caption-main" *ngIf="!isDragOver">
             <div class="form-control">
                 <div class="file-caption-name">
-                    <i class="fa fa-file-o" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
+                    <i class="fas fa-file" aria-hidden="true" *ngIf="isNotNullOrEmpty()"></i>
                     <span>{{ getInputText() }}</span>
                 </div>
             </div>
             <div class="input-group-append">
                 <button class="btn btn-secondary btn-action" type="button" title="Clear selected files" (click)="onRemove()" *ngIf="isNotNullOrEmpty()">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>  
+                    <i class="fas fa-trash" aria-hidden="true"></i>  
                     <span class="d-none d-md-inline-flex">{{ textRemove }}</span>
                 </button>
             </div>
             <div class="input-group-append" *ngIf="!disableUpload">
                 <button class="btn btn-secondary btn-action" type="button" title="Upload selected files" (click)="onUpload()" *ngIf="isNotNullOrEmpty()">
-                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>  
+                    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>  
                     <span class="d-none d-md-inline-flex">{{ textUpload }}</span>
                 </button>
             </div>
             <div class="input-group-append">
                 <div class="btn btn-primary btn-file" [ngClass]="{'disabled': dropZoneDisabled}">
-                    <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                    <i class="fas fa-folder-open" aria-hidden="true"></i>
                     <span class="d-none d-md-inline-flex">{{ textBrowse }}</span>
                     <input id="{{ inputId }}" class="file" name="input-file-name" type="file" 
                         accept="{{ inputAccept }}" 

@@ -12,11 +12,11 @@ Style is based on [Bootstrap File Input](http://plugins.krajee.com/file-input/de
 ![Input File screenshot](http://img4.hostingpics.net/pics/206713inputfile2.png)
 
 ## Key features
- - Preview of the file
- - Drag and drop zone
- - Responsive
- - [Bootstrap 4.0.0](https://getbootstrap.com/) required.
- - [Font Awesome](http://fontawesome.io/) support
+- Preview of the file
+- Drag and drop zone
+- Responsive
+- [Bootstrap 4](https://getbootstrap.com/) required.
+- [Font Awesome 5](http://fontawesome.com/) support
 
 ## Installation 
 ```bash
@@ -134,5 +134,7 @@ You're welcome, please fork this repository to a make pull request.
 Clone this repository and run `npm start`.
 
 ## Changelog
+### 1.0.2
+- Drop font awesome 4 support to font awesome 5
 ### 1.0.1 
 - Fix issue #3
