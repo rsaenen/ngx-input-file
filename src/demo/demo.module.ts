@@ -1,9 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DemoComponent } from './demo.component';
 import { InputFileModule } from '../app/input-file.module';
+import {CommonModule} from '@angular/common';
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         InputFileModule,
         RouterModule.forRoot(routes)
     ],
