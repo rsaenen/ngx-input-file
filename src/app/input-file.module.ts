@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { DropZoneDirective } from './directives/drop-zone.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { InputFileComponent } from './components/input-file.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -11,7 +11,7 @@ import { InputFileComponent } from './components/input-file.component';
         InputFileComponent
     ],
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule,
         HttpClientModule
     ],
