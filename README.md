@@ -132,9 +132,3 @@ You're welcome, please fork this repository to a make pull request.
 
 ### Demonstration
 Clone this repository and run `npm start`.
-
-## Changelog
-### 1.0.2
-- Drop font awesome 4 support to font awesome 5
-### 1.0.1 
-- Fix issue #3
