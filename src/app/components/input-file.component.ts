@@ -275,7 +275,7 @@ export class InputFileComponent {
     private removeHandler(): void {
         this.dropZoneDisabled = false;
         this.inputFile.nativeElement.value = '';
-        this.model = new Array<File>();
+        this.model.splice(0, this.model.length);
     }
 
     /**
