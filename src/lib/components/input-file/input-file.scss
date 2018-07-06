@@ -1,0 +1,76 @@
+@mixin input-file {
+
+    .input-file-container {
+        display: flex;
+        flex-direction: row;
+
+        .file-button {
+            align-items: center;
+            display: flex;
+            height: 10rem;
+            justify-content: center;
+            width: 10rem;
+
+            &:focus {
+                outline: 0;
+            }
+
+            &:not(:last-of-type) {
+                margin-right: .5rem;
+            }
+
+            .icon-add {
+                font-size: 2.5rem;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+
+        .file-name {
+            width: 7.5rem;
+        }
+    }
+
+    @keyframes bounceIn {
+        from,
+        20%,
+        40%,
+        60%,
+        80%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+    
+        0% {
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+    
+        20% {
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+    
+        40% {
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+    
+        60% {
+            opacity: 1;
+            transform: scale3d(1.03, 1.03, 1.03);
+        }
+    
+        80% {
+            transform: scale3d(0.97, 0.97, 0.97);
+        }
+    
+        to {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+    }
+    
+    .bounce-in {
+        animation-duration: 0.75s;
+        animation-name: bounceIn;
+    }
+}

@@ -1,0 +1,20 @@
+<div class="input-file-container">
+    <ng-container *ngFor="let file of files; let i = index">
+        <button mat-button appDropZone class="file-button bounce-in" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, i)">
+            <mat-icon>insert_drive_file</mat-icon>
+            <div class="file-name text-truncate">
+                {{ file.name }}
+            </div>
+        </button>
+        <input [accept]="fileAccept" hidden type="file" #fileReplace (change)="onReplaceFile($event.target.files, i, fileReplace)">
+    </ng-container>
+
+    <ng-container *ngIf="canAddFile">
+        <button mat-button appDropZone class="file-button" type="button" (click)="fileInput.click()" (itemDrop)="onSelectFile($event)"
+            (itemDragOver)="onDragOver()" (itemDragLeave)="onDragLeave()" #selectButton>
+            <mat-icon class="icon-add">add</mat-icon>
+        </button>
+        <input [id]="inputId" [accept]="fileAccept" hidden type="file" [attr.multiple]="fileLimit > 1 ? true : null" #fileInput (change)="onSelectFile($event.target.files)"
+            [disabled]="disabled">
+    </ng-container>
+</div>

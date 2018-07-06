@@ -1,23 +1,11 @@
-<div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col-6 m-auto">
-            <input-file 
-                inputId="images" 
-                inputMaxFiles="4" 
-                [(model)]="inputFileModel"
-                (acceptedFile)="onAccept($event)"
-                (removedFile)="onRemove($event)">
-            </input-file> 
+<mat-toolbar color="primary">Input file demo</mat-toolbar>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <input-file inputId="input-file" fileLimit="4" [(ngModel)]="model"></input-file>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-6 m-auto">
-            <input-file 
-                inputId="images-minimal" 
-                minimal="true"
-                [(model)]="inputFileMinimalModel"
-                (acceptedFile)="onAccept($event)">
-            </input-file> 
+        <div class="col-12">
+            <input-file inputId="input-file-2" fileAccept="*" [(ngModel)]="model2"></input-file>
         </div>
     </div>
 </div>

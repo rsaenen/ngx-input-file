@@ -1,9 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { DemoComponent } from './demo.component';
-import { InputFileModule } from '../app/input-file.module';
-import {CommonModule} from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InputFileConfig } from '../lib/interfaces/input-file-config';
+import { InputFileModule } from '../lib/input-file.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const config: InputFileConfig = {
+    fileAccept: 'image/*',
+    fileLimit: 2
+};
 
 const routes: Routes = [
     {
@@ -14,8 +21,10 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        CommonModule,
-        InputFileModule,
+        BrowserModule,
+        FormsModule,
+        InputFileModule.forRoot(config),
+        MatToolbarModule,
         RouterModule.forRoot(routes)
     ],
     declarations: [DemoComponent],

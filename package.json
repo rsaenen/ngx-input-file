@@ -1,6 +1,7 @@
 {
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "name": "ngx-input-file",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Angular Input File Component",
   "license": "MIT",
   "repository": {
@@ -10,14 +11,6 @@
   "author": "Ralf Saenen <ralf.saenen@gmail.com>",
   "bugs": {
     "url": "https://github.com/rsaenen/ngx-input-file/issues"
-  },
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng-packagr -p ng-package.json",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
   },
   "homepage": "https://github.com/rsaenen/ngx-input-file#readme",
   "keywords": [
@@ -30,42 +23,62 @@
     "font",
     "awesome"
   ],
-  "dependencies": {},
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng-packagr -p ng-package.json",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^6.3.2",
+    "@angular/core": "^6.0.7",
+    "@angular/common": "^6.0.7",
+    "@angular/forms": "^6.0.7",
+    "@angular/material": "^6.3.2",
+    "material-design-icons": "^3.0.1"
+  },
   "devDependencies": {
-    "@angular/animations": "^5.2.4",
-    "@angular/cli": "1.6.8",
-    "@angular/common": "^5.2.4",
-    "@angular/compiler": "^5.2.4",
-    "@angular/compiler-cli": "^5.2.4",
-    "@angular/core": "^5.2.4",
-    "@angular/forms": "^5.2.4",
-    "@angular/http": "^5.2.4",
-    "@angular/language-service": "^5.2.4",
-    "@angular/platform-browser": "^5.2.4",
-    "@angular/platform-browser-dynamic": "^5.2.4",
-    "@angular/router": "^5.2.4",
-    "@types/jasmine": "~2.8.6",
+    "@angular-devkit/build-angular": "~0.6.8",
+    "@angular/animations": "^6.0.7",
+    "@angular/cdk": "^6.3.2",
+    "@angular/cli": "~6.0.8",
+    "@angular/common": "^6.0.7",
+    "@angular/compiler": "^6.0.7",
+    "@angular/compiler-cli": "^6.0.7",
+    "@angular/core": "^6.0.7",
+    "@angular/forms": "^6.0.7",
+    "@angular/http": "^6.0.7",
+    "@angular/language-service": "^6.0.7",
+    "@angular/material": "^6.3.2",
+    "@angular/platform-browser": "^6.0.7",
+    "@angular/platform-browser-dynamic": "^6.0.7",
+    "@angular/router": "^6.0.7",
+    "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.1",
-    "bootstrap": "^4.0.0",
-    "codelyzer": "^4.1.0",
-    "core-js": "^2.5.3",
-    "font-awesome": "^4.7.0",
-    "jasmine-core": "~2.99.1",
+    "@types/node": "~10.5.1",
+    "bootstrap": "^4.1.1",
+    "codelyzer": "~4.4.2",
+    "core-js": "^2.5.7",
+    "jasmine-core": "~3.1.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "jquery": "^3.2.1",
-    "karma": "~2.0.0",
+    "karma": "~2.0.4",
     "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "^1.4.1",
-    "karma-jasmine": "~1.1.1",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^2.0.0",
-    "popper.js": "^1.12.9",
-    "rxjs": "^5.5.6",
-    "ts-node": "~4.1.0",
-    "protractor": "~5.3.0",
-    "tslint": "~5.9.1",
-    "typescript": "~2.6.2",
-    "zone.js": "^0.8.20"
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^1.2.0",
+    "material-design-icons": "^3.0.1",
+    "protractor": "~5.3.2",
+    "rxjs": "^6.2.1",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.10.0",
+    "typescript": "~2.7.2",
+    "zone.js": "^0.8.26"
   }
 }

@@ -1,10 +1,9 @@
-import { DropZoneDirective } from './src/app/directives/drop-zone.directive';
-import { InputFileComponent } from './src/app/components/input-file.component';
-import { InputFileModule } from './src/app/input-file.module';
-
+import { InputFileComponent } from './src/lib/components/input-file/input-file.component';
+import { InputFileModule } from './src/lib/input-file.module';
+import { InputFileService } from './src/lib/services/input-file.service';
 
 export {
-  DropZoneDirective,
-  InputFileComponent,
-  InputFileModule
+    InputFileComponent,
+    InputFileModule,
+    InputFileService
 };
