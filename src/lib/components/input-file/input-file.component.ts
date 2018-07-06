@@ -30,6 +30,7 @@ export class InputFileComponent implements ControlValueAccessor {
     private _fileAccept: string;
     private _fileLimit: number;
     private _sizeLimit: number;
+    private fr: FileReader;
 
     @Input() disabled: boolean;
     @Input() inputId: string;
@@ -66,23 +67,40 @@ export class InputFileComponent implements ControlValueAccessor {
     public onChange = (files: Array<File>) => { };
     public onTouched = () => { };
 
+    get canAddFile(): boolean {
+        return this.files && this.files.length < this.fileLimit;
+    }
+
     constructor(
         private inputFileService: InputFileService
-    ) {}
-
-    get canAddFile(): boolean {
-        return !this.disabled && this.files && this.files.length < this.fileLimit;
+    ) {
+        this.fr = new FileReader();
     }
 
-    @HostBinding('style.opacity')
-    get opacity() {
-        return this.disabled ? 0.25 : 1;
+    /**
+     * On delete a file event handler.
+     * @param index
+     */
+    public onDeleteFile(index: number): void {
+        if (!this.disabled) {
+            const files = this.files.slice();
+            files.splice(index, 1);
+            this.writeValue(files);
+        }
     }
 
+    /**
+     * On drag over event handler.
+     * Adds a ripple effect on the button.
+     */
     public onDragOver(): void {
         this.selectButton.ripple.launch({ centered: true, persistent: true});
     }
 
+    /**
+     * On drag leave event handler.
+     * Fades the ripple effect of the button.
+     */
     public onDragLeave(): void {
         this.selectButton.ripple.fadeOutAll();
     }
@@ -192,6 +210,17 @@ export class InputFileComponent implements ControlValueAccessor {
      */
     private limitGuard(files: Array<File>): boolean {
         return files.length < this.fileLimit;
+    }
+
+    /**
+     * Read file handler.
+     * @param image.
+     */
+    private readFileHandler(file: any): void {
+        this.fr.onload = () => {
+            file.icon = this.fr.result;
+        };
+        this.fr.readAsDataURL(file);
     }
 
     /**
