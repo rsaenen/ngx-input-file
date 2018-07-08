@@ -1,40 +1,35 @@
-@mixin input-file {
-
+@mixin input-file($height, $width, $padding) {
     .input-file-container {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
 
         %common-container {
             align-items: center;
             display: flex;
-            height: 10rem;
+            height: $height;
             justify-content: center;
-            width: 10rem;
+            width: $width;
         }
 
         .delete-button {
-            width: 10rem;
+            width: $width;
         }
 
         .file-button {
             @extend %common-container;
-
-            .icon-add {
-                font-size: 2.5rem;
-                height: 2.5rem;
-                width: 2.5rem;
-            }
         }
 
         .file-container {
             @extend %common-container;
+
             flex-direction: column;
-            margin-right: .5rem;
+            margin-right: 1rem;
         }
 
         .replace-button {
             flex: 1;
-            width: 10rem;
+            width: $width;
         }
 
         .mat-button {
@@ -44,7 +39,20 @@
         }
 
         .file-name {
-            width: 7.5rem;
+            width: calc(#{$width} - #{$padding});
+        }
+
+        .image-preview {
+            margin: 0 -16px;
+            height: $height;
+            object-fit: contain;
+            width: $width;
+        }
+
+        .input-icon {
+            font-size: calc(#{$width} / 4);
+            height: calc(#{$width} / 4);
+            width: calc(#{$width} / 4);
         }
     }
 
@@ -55,39 +63,41 @@
         60%,
         80%,
         to {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(.215, .61, .355, 1);
         }
-    
+
         0% {
             opacity: 0;
-            transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(.3, .3, .3);
         }
-    
+
         20% {
             transform: scale3d(1.1, 1.1, 1.1);
         }
-    
+
         40% {
-            transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(.9, .9, .9);
         }
-    
+
         60% {
             opacity: 1;
             transform: scale3d(1.03, 1.03, 1.03);
         }
-    
+
         80% {
-            transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(.97, .97, .97);
         }
-    
+
         to {
             opacity: 1;
             transform: scale3d(1, 1, 1);
         }
     }
-    
+
     .bounce-in {
-        animation-duration: 0.75s;
+        animation-duration: .75s;
         animation-name: bounceIn;
     }
 }
+
+@include input-file(10rem, 10rem, 2.5rem);

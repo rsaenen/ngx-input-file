@@ -33,4 +33,4 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
 @import './lib/components/input-file/input-file';
-@include input-file;
+@include input-file(10rem, 10rem, 2.5rem);

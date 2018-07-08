@@ -8,8 +8,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const config: InputFileConfig = {
-    fileAccept: 'image/*',
-    fileLimit: 2
+    fileAccept: '*',
+    fileLimit: 4
 };
 
 const routes: Routes = [

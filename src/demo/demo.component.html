@@ -1,8 +1,23 @@
-<mat-toolbar color="primary">Input file demo</mat-toolbar>
+<mat-toolbar color="primary">
+    <div class="container">
+        Input file demo
+    </div>
+</mat-toolbar>
 <div class="container mt-5">
     <div class="row">
-        <div class="col">
-            <input-file inputId="input-file" fileLimit="4" [(ngModel)]="model"></input-file>
+        <div class="col-12">
+            <pre>Configuration - fileAccept: '*', fileLimit: 4</pre>
+            <input-file inputId="input-file"></input-file>
+        </div>
+
+        <div class="col-12">
+            <pre>Configuration - fileAccept: 'image/*', fileLimit: 2</pre>
+            <input-file inputId="input-file" fileAccept="image/*" fileLimit="2"></input-file>
+        </div>
+
+        <div class="col-12">
+            <pre>Configuration - disabled: true</pre>
+            <input-file inputId="input-file" [disabled]="true"></input-file>
         </div>
     </div>
 </div>

@@ -1,18 +1,10 @@
-import {
-    Component,
-    ElementRef,
-    EventEmitter,
-    forwardRef,
-    HostBinding,
-    Input,
-    Output,
-    ViewChild
-    } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputFile } from '../../dto/input-file';
+import { InputFileRejected } from '../../interfaces/input-file-rejected';
 import { InputFileRejectedReason } from '../../enums/input-file-rejected-reason';
 import { InputFileService } from '../../services/input-file.service';
 import { MatButton } from '@angular/material/button';
-import { InputFileRejected,  } from '../../interfaces/input-file-rejected';
 
 @Component({
     selector: 'input-file',
@@ -30,7 +22,6 @@ export class InputFileComponent implements ControlValueAccessor {
     private _fileAccept: string;
     private _fileLimit: number;
     private _sizeLimit: number;
-    private fr: FileReader;
 
     @Input() disabled: boolean;
     @Input() inputId: string;
@@ -61,10 +52,9 @@ export class InputFileComponent implements ControlValueAccessor {
 
     @Output() rejectedFile = new EventEmitter<InputFileRejected>();
     @ViewChild('fileInput') fileInput: ElementRef;
-    @ViewChild('selectButton') selectButton: MatButton;
 
-    public files = new Array<File>();
-    public onChange = (files: Array<File>) => { };
+    public files = new Array<InputFile>();
+    public onChange = (files: Array<InputFile>) => { };
     public onTouched = () => { };
 
     get canAddFile(): boolean {
@@ -73,9 +63,7 @@ export class InputFileComponent implements ControlValueAccessor {
 
     constructor(
         private inputFileService: InputFileService
-    ) {
-        this.fr = new FileReader();
-    }
+    ) { }
 
     /**
      * On delete a file event handler.
@@ -93,16 +81,16 @@ export class InputFileComponent implements ControlValueAccessor {
      * On drag over event handler.
      * Adds a ripple effect on the button.
      */
-    public onDragOver(): void {
-        this.selectButton.ripple.launch({ centered: true, persistent: true});
+    public onDragOver(button: MatButton): void {
+        button.ripple.launch({ centered: true, persistent: true });
     }
 
     /**
      * On drag leave event handler.
      * Fades the ripple effect of the button.
      */
-    public onDragLeave(): void {
-        this.selectButton.ripple.fadeOutAll();
+    public onDragLeave(button: MatButton): void {
+        button.ripple.fadeOutAll();
     }
 
     /**
@@ -112,16 +100,19 @@ export class InputFileComponent implements ControlValueAccessor {
      * @param index
      * @param fileInput
      */
-    public onReplaceFile(fileList: FileList, index: number, fileInput?: HTMLInputElement): void {
-        // Copies the array without reference.
-        const files = this.files.slice();
-        // Assumes that a single file can be replaced by a single file.
-        if (this.fileGuard(files, fileList.item(0), true)) {
-            files[index] = fileList.item(0);
-        }
-        this.writeValue(files);
-        if (fileInput) {
-            fileInput.value = '';
+    public onReplaceFile(fileList: FileList, index: number, button: MatButton, fileInput?: HTMLInputElement): void {
+        if (!this.disabled) {
+            // Copies the array without reference.
+            const files = this.files.slice();
+            button.ripple.fadeOutAll();
+            // Assumes that a single file can be replaced by a single file.
+            if (this.fileGuard(files, fileList.item(0), true)) {
+                files[index] = <InputFile>fileList.item(0);
+            }
+            this.writeValue(files);
+            if (fileInput) {
+                fileInput.value = '';
+            }
         }
     }
 
@@ -130,14 +121,14 @@ export class InputFileComponent implements ControlValueAccessor {
      * Writes the value.
      * @param fileList
      */
-    public onSelectFile(fileList: FileList): void {
+    public onSelectFile(fileList: FileList, button: MatButton): void {
         if (!this.disabled) {
-            this.selectButton.ripple.fadeOutAll();
+            button.ripple.fadeOutAll();
             // Copies the array without reference.
             const files = this.files.slice();
             Array.from(fileList).forEach(file => {
                 if (this.fileGuard(files, file)) {
-                    files.push(file);
+                    files.push(<InputFile>file);
                 }
             });
             this.writeValue(files);
@@ -149,7 +140,7 @@ export class InputFileComponent implements ControlValueAccessor {
      * Implementation of ControlValueAccessor.
      * @param fn
      */
-    public registerOnChange(fn: (files: Array<File>) => void): void {
+    public registerOnChange(fn: (files: Array<InputFile>) => void): void {
         this.onChange = fn;
     }
 
@@ -173,9 +164,10 @@ export class InputFileComponent implements ControlValueAccessor {
      * Implementation of ControlValueAccessor.
      * @param files
      */
-    public writeValue(files: Array<File>): void {
+    public writeValue(files: Array<InputFile>): void {
         if (!this.disabled) {
             this.files = files;
+            this.setFilePreview();
             this.onChange(this.files);
         }
     }
@@ -185,18 +177,18 @@ export class InputFileComponent implements ControlValueAccessor {
      * @param files
      * @param file
      */
-    private fileGuard(files: Array<File>, file: File, bypassLimit?: boolean): boolean {
-        if (!bypassLimit && !this.limitGuard(files)) {
+    private fileGuard(files: Array<InputFile>, file: File | InputFile, bypassLimit?: boolean): boolean {
+        if (!bypassLimit && !this.inputFileService.limitGuard(files, this.fileLimit)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.limitReached, file: file });
             return false;
         }
 
-        if (!this.sizeGuard(file)) {
+        if (!this.inputFileService.sizeGuard(file, this.sizeLimit)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.sizeReached, file: file });
             return false;
         }
 
-        if (!this.typeGuard(file)) {
+        if (!this.inputFileService.typeGuard(file, this.fileAccept)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.badFile, file: file });
             return false;
         }
@@ -204,50 +196,19 @@ export class InputFileComponent implements ControlValueAccessor {
         return true;
     }
 
-    /**
-     * Whether the limit is not reached.
-     * @param files
-     */
-    private limitGuard(files: Array<File>): boolean {
-        return files.length < this.fileLimit;
-    }
 
     /**
-     * Read file handler.
-     * @param image.
+     * Sets the file preview with FileReader.
      */
-    private readFileHandler(file: any): void {
-        this.fr.onload = () => {
-            file.icon = this.fr.result;
-        };
-        this.fr.readAsDataURL(file);
-    }
-
-    /**
-     * Whether the file size is not bigger than the limit.
-     * @param file
-     */
-    private sizeGuard(file: File): boolean {
-        return !+this.sizeLimit || file.size < +this.sizeLimit * 1024 * 1024; // TODO : improve
-    }
-
-    /**
-     * Whether the type of the file is enabled.
-     * @param file
-     */
-    private typeGuard(file: File): boolean {
-        let enabled = this.fileAccept == null;
-        if (this.fileAccept) {
-            const accept = this.fileAccept.replace('*', '');
-            const types = accept.split(',');
-            for (const type of types) {
-                if (file.type.startsWith(type) || (type.charAt(0) === '.' && file.name != null && file.name.endsWith(type))) {
-                    enabled = true;
-                    break;
-                }
+    public setFilePreview(): void {
+        for (const index in this.files) {
+            if (this.inputFileService.typeGuard(this.files[index], 'image/*')) {
+                const fr = new FileReader();
+                fr.onload = () => {
+                    this.files[index].preview = fr.result;
+                };
+                fr.readAsDataURL(this.files[index]);
             }
         }
-
-        return enabled;
     }
 }

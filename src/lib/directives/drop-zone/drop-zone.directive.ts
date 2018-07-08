@@ -7,7 +7,7 @@ import {
     } from '@angular/core';
 
 @Directive({
-    selector: '[appDropZone]'
+    selector: '[inputFileDropZone]'
 })
 export class DropZoneDirective {
     @Input() public disabled = false;
@@ -17,7 +17,7 @@ export class DropZoneDirective {
 
     private isOver: boolean;
     // Prevent dragleave on children, could be better but it's cheap for better performance
-    private whiteListClasses = ['file-button', 'mat-button-wrapper', 'icon-add'];
+    private whiteListClasses = ['file-button', 'mat-button-wrapper', 'input-icon'];
 
     /**
      * Drag Over event handler.
@@ -77,8 +77,8 @@ export class DropZoneDirective {
      */
     private isTrueLeave(event: DragEvent): boolean {
         for (const c of this.whiteListClasses) {
-            if (event.fromElement.className.indexOf(c) >= 0) {
-            return false;
+            if (event.fromElement != null && event.fromElement.className.indexOf(c) >= 0) {
+                return false;
             }
         }
         return true;

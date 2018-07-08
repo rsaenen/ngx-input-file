@@ -1,25 +1,27 @@
 <div class="input-file-container">
     <ng-container *ngFor="let file of files; let i = index">
         <div class="file-container bounce-in">
-            <button mat-button appDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, i)"
-                [disabled]="disabled">
-                <mat-icon>insert_drive_file</mat-icon>
-                <div class="file-name text-truncate">
-                    {{ file.name }}
-                </div>
+            <button mat-button inputFileDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, i,replaceButton)"
+                [disabled]="disabled" (itemDragOver)="onDragOver(replaceButton)" (itemDragLeave)="onDragLeave(replaceButton)" #replaceButton>
+                <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
+                <ng-template #noPreview>
+                    <mat-icon class="input-icon">insert_drive_file</mat-icon>
+                    <div class="file-name text-truncate" [innerHtml]="file.name"></div>
+                </ng-template>
+
             </button>
             <button mat-button class="delete-button" type="button" (click)="onDeleteFile(i)" [disabled]="disabled">
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
-        <input [accept]="fileAccept" hidden type="file" #fileReplace (change)="onReplaceFile($event.target.files, i, fileReplace)">
+        <input [accept]="fileAccept" hidden type="file" #fileReplace (change)="onReplaceFile($event.target.files, i, replaceButton, fileReplace)">
     </ng-container>
 
     <ng-container *ngIf="canAddFile">
-        <button mat-button appDropZone class="file-button" type="button" (click)="fileInput.click()" (itemDrop)="onSelectFile($event)"
-            (itemDragOver)="onDragOver()" (itemDragLeave)="onDragLeave()" [disabled]="disabled" #selectButton>
-            <mat-icon class="icon-add">add</mat-icon>
+        <button mat-button inputFileDropZone class="file-button" type="button" (click)="fileInput.click()" (itemDrop)="onSelectFile($event, selectButton)"
+            (itemDragOver)="onDragOver(selectButton)" (itemDragLeave)="onDragLeave(selectButton)" [disabled]="disabled" #selectButton>
+            <mat-icon class="input-icon">add</mat-icon>
         </button>
-        <input [id]="inputId" [accept]="fileAccept" hidden type="file" [attr.multiple]="fileLimit > 1 ? true : null" #fileInput (change)="onSelectFile($event.target.files)">
+        <input [id]="inputId" [accept]="fileAccept" hidden type="file" [attr.multiple]="fileLimit > 1 ? true : null" #fileInput (change)="onSelectFile($event.target.files, selectButton)">
     </ng-container>
 </div>

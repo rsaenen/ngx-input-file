@@ -26,7 +26,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng-packagr -p ng-package.json",
+    "build": "ng-packagr -p package.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -74,6 +74,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^1.2.0",
     "material-design-icons": "^3.0.1",
+    "ng-packagr": "^3.0.3",
     "protractor": "~5.3.2",
     "rxjs": "^6.2.1",
     "ts-node": "~7.0.0",

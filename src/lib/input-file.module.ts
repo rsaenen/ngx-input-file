@@ -29,7 +29,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 })
 
 export class InputFileModule {
-    public static forRoot(config?: InputFileConfig): ModuleWithProviders {
+    public static forRoot(config: InputFileConfig): ModuleWithProviders {
         return {
             ngModule: InputFileModule,
             providers: [
