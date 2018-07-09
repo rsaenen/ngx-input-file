@@ -2,7 +2,7 @@
 
 **ngx-input-file** is a module to replace the html element input file with Material Design.
 
-Try it with Stackblitz (will be possible soon as possible).
+Try it with [Stackblitz](https://stackblitz.com/edit/angular-f3zu7r)!
 
 ## Key features
 - Preview of the file
@@ -31,6 +31,14 @@ const config: InputFileConfig = {};
 })
 
 export class MyModule {}
+```
+
+Please include `material-design-icons` in your `angular.json`:
+```json
+"styles": [
+    "node_modules/material-design-icons/iconfont/material-icons.css",
+    "src/styles.scss"
+]
 ```
 
 ### Component Attributes
