@@ -1,27 +1,107 @@
-# NgxInputFile
+# ngx-input-file
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+**ngx-input-file** is a module to replace the html element input file with Material Design.
 
-## Development server
+Try it with Stackblitz (will be possible soon as possible).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Key features
+- Preview of the file
+- Drag and drop zone
+- Responsive
 
-## Code scaffolding
+## Installation 
+```bash
+npm install ngx-input-file --save
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Basic Configuration
+```typescript
+import { NgModule } from '@angular/core';
+import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 
-## Build
+const config: InputFileConfig = {};
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@NgModule({
+    imports: [
+        ... 
+        InputFileModule.forRoot(config),
+        ...
+    ],
+    ...
+})
 
-## Running unit tests
+export class MyModule {}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Component Attributes
+These settings will overide the configuration defined with `forRoot()` method.  
 
-## Running end-to-end tests
+| Attribute               | Type                    | Description                              |
+| ----------------------- |:-----------------------:| :---------------------------------------- |
+| inputId                 | string                  | The attribute identifier of the html element input. |
+| fileAccept              | string                  | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
+| fileLimit               | number                  | The maximum files that the user can upload. |
+| sizeLimit               | number                  | The maximum size of the file (kB). |
+| disabled                | boolean                 | Whether the component is disabled. |
+| ngModel/formControlname | Array<InputFile>        | Template driven or reactive form works. 
+| acceptedFile            | EventEmitter<InputFile> | Triggered when a file is accepted. |
+| deletedFile             | EventEmitter<InputFile> | Triggered when a file is deleted. |
+| rejectedFile            | EventEmitter<InputFile> | Triggered when a file is rejected. |
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Configuration Attributes
+| Attribute               | Type                    | Description                              |
+| ----------------------- |:-----------------------:| :---------------------------------------- |
+| fileLimit               | number                  | The maximum files that the user can upload. |
+| sizeLimit               | number                  | The maximum size of the file (kB). |
+| disabled                | boolean                 | Whether the component is disabled. |
 
-## Further help
+## Example
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```html
+<input-file 
+    inputId="images"
+    fileAccept=".docx,.pdf,image/*"
+    fileLimit="2" 
+    [(ngModel)]="myModel"
+    (acceptedFile)="onAccept($event)"
+    (deletedFile)="onDelete($event)"
+    (removedFile)="onRemove($event)">
+</input-file>
+
+<input-file 
+    inputId="images"
+    fileAccept=".docx,.pdf,image/*"
+    fileLimit="2" 
+    formControlName="myField"
+    (acceptedFile)="onAccept($event)"
+    (deletedFile)="onDelete($event)"
+    (removedFile)="onRemove($event)">
+</input-file> 
+```
+
+### Bonus
+Here's an example to post a file:
+```ts
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
+export class MyRepository {
+
+constructor(
+    private http: HttpClient
+) {}
+
+public post(file: any): Observable<any> {
+    const apiUrl = 'my-url';
+    const formData = new FormData();
+    formData.append('file', file.file, file.file.name);
+    return this.http.post(apiUrl, formData)
+        .map(res => <any>res);
+}
+```
+
+## For developpers
+You're welcome, please fork this repository to a make pull request.
+
+## Demonstration
+Clone this repository and run `npm start`.

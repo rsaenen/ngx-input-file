@@ -50,6 +50,8 @@ export class InputFileComponent implements ControlValueAccessor {
         return this._sizeLimit || this.inputFileService.config.sizeLimit || null;
     }
 
+    @Output() acceptedFile = new EventEmitter<InputFile>();
+    @Output() deletedFile = new EventEmitter<InputFile>();
     @Output() rejectedFile = new EventEmitter<InputFileRejected>();
     @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -72,6 +74,7 @@ export class InputFileComponent implements ControlValueAccessor {
     public onDeleteFile(index: number): void {
         if (!this.disabled) {
             const files = this.files.slice();
+            this.deletedFile.emit(files[index]);
             files.splice(index, 1);
             this.writeValue(files);
         }
@@ -104,10 +107,12 @@ export class InputFileComponent implements ControlValueAccessor {
         if (!this.disabled) {
             // Copies the array without reference.
             const files = this.files.slice();
-            button.ripple.fadeOutAll();
             // Assumes that a single file can be replaced by a single file.
-            if (this.fileGuard(files, fileList.item(0), true)) {
-                files[index] = <InputFile>fileList.item(0);
+            const inputFile = <InputFile>fileList.item(0);
+            button.ripple.fadeOutAll();
+            if (this.fileGuard(files, inputFile, true)) {
+                files[index] = inputFile;
+                this.acceptedFile.emit(inputFile);
             }
             this.writeValue(files);
             if (fileInput) {
@@ -127,8 +132,10 @@ export class InputFileComponent implements ControlValueAccessor {
             // Copies the array without reference.
             const files = this.files.slice();
             Array.from(fileList).forEach(file => {
-                if (this.fileGuard(files, file)) {
-                    files.push(<InputFile>file);
+                const inputFile = <InputFile>file;
+                if (this.fileGuard(files, inputFile)) {
+                    files.push(inputFile);
+                    this.acceptedFile.emit(inputFile);
                 }
             });
             this.writeValue(files);
@@ -175,9 +182,10 @@ export class InputFileComponent implements ControlValueAccessor {
     /**
      * Whether the file can be added to the model.
      * @param files
-     * @param file
+     * @param file,
+     * @param bypassLimit
      */
-    private fileGuard(files: Array<InputFile>, file: File | InputFile, bypassLimit?: boolean): boolean {
+    private fileGuard(files: Array<InputFile>, file: InputFile, bypassLimit?: boolean): boolean {
         if (!bypassLimit && !this.inputFileService.limitGuard(files, this.fileLimit)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.limitReached, file: file });
             return false;
