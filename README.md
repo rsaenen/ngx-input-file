@@ -4,6 +4,8 @@
 
 Try it with [Stackblitz](https://stackblitz.com/edit/angular-f3zu7r)!
 
+For the previous version with bootstrap: `ngx-input-file@1.0.4`.
+
 ## Key features
 - Preview of the file
 - Drag and drop zone
@@ -51,6 +53,7 @@ These settings will overide the configuration defined with `forRoot()` method.
 | fileLimit               | number                  | The maximum files that the user can upload. |
 | sizeLimit               | number                  | The maximum size of the file (kB). |
 | disabled                | boolean                 | Whether the component is disabled. |
+| placeholder             | string                  | The placeholder of the component. |
 | ngModel/formControlname | Array<InputFile>        | Template driven or reactive form works. 
 | acceptedFile            | EventEmitter<InputFile> | Triggered when a file is accepted. |
 | deletedFile             | EventEmitter<InputFile> | Triggered when a file is deleted. |

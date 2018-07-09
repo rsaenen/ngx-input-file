@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { InputFile } from '../dto/input-file';
 import { InputFileConfig } from '../interfaces/input-file-config';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class InputFileService {
      * Whether the limit is not reached.
      * @param files
      */
-    public limitGuard(files: Array<File>, fileLimit): boolean {
+    public limitGuard(files: Array<InputFile>, fileLimit): boolean {
         return files.length < fileLimit;
     }
 

@@ -25,6 +25,7 @@ export class InputFileComponent implements ControlValueAccessor {
 
     @Input() disabled: boolean;
     @Input() inputId: string;
+    @Input() placeholder: string;
 
     @Input() set fileAccept(fileAccept: string) {
         this._fileAccept = fileAccept;
@@ -108,7 +109,7 @@ export class InputFileComponent implements ControlValueAccessor {
             // Copies the array without reference.
             const files = this.files.slice();
             // Assumes that a single file can be replaced by a single file.
-            const inputFile = <InputFile>fileList.item(0);
+            const inputFile = new InputFile(null, null, fileList.item(0));
             button.ripple.fadeOutAll();
             if (this.fileGuard(files, inputFile, true)) {
                 files[index] = inputFile;
@@ -132,7 +133,7 @@ export class InputFileComponent implements ControlValueAccessor {
             // Copies the array without reference.
             const files = this.files.slice();
             Array.from(fileList).forEach(file => {
-                const inputFile = <InputFile>file;
+                const inputFile = new InputFile(null, null, file);
                 if (this.fileGuard(files, inputFile)) {
                     files.push(inputFile);
                     this.acceptedFile.emit(inputFile);
@@ -191,12 +192,12 @@ export class InputFileComponent implements ControlValueAccessor {
             return false;
         }
 
-        if (!this.inputFileService.sizeGuard(file, this.sizeLimit)) {
+        if (!this.inputFileService.sizeGuard(file.file, this.sizeLimit)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.sizeReached, file: file });
             return false;
         }
 
-        if (!this.inputFileService.typeGuard(file, this.fileAccept)) {
+        if (!this.inputFileService.typeGuard(file.file, this.fileAccept)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.badFile, file: file });
             return false;
         }
@@ -210,12 +211,12 @@ export class InputFileComponent implements ControlValueAccessor {
      */
     public setFilePreview(): void {
         for (const index in this.files) {
-            if (this.inputFileService.typeGuard(this.files[index], 'image/*')) {
+            if (this.inputFileService.typeGuard(this.files[index].file, 'image/*')) {
                 const fr = new FileReader();
                 fr.onload = () => {
                     this.files[index].preview = fr.result;
                 };
-                fr.readAsDataURL(this.files[index]);
+                fr.readAsDataURL(this.files[index].file);
             }
         }
     }

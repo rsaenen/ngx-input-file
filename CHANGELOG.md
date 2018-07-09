@@ -1,3 +1,8 @@
+### [2.0.1]
+- Adding a placeholder
+- Adding an identifier and the File to InputFile dto.
+- Droping extends of File in InputFile dto.
+
 ### [2.0.0] Major release
 - Angular Material support
 - Drop Bootstrap support
