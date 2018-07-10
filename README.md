@@ -2,7 +2,7 @@
 
 **ngx-input-file** is a module to replace the html element input file with Material Design.
 
-Try it with [Stackblitz](https://stackblitz.com/edit/angular-f3zu7r)!
+Try it with [Stackblitz](https://stackblitz.com/edit/ngx-input-file)!
 
 For the previous version with bootstrap: `ngx-input-file@1.0.4`.
 
@@ -62,31 +62,23 @@ These settings will overide the configuration defined with `forRoot()` method.
 ### Configuration Attributes
 | Attribute               | Type                    | Description                              |
 | ----------------------- |:-----------------------:| :---------------------------------------- |
+| fileAccept              | number                 | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
 | fileLimit               | number                  | The maximum files that the user can upload. |
 | sizeLimit               | number                  | The maximum size of the file (kB). |
-| disabled                | boolean                 | Whether the component is disabled. |
 
 ## Example
 
 ```html
 <input-file 
-    inputId="images"
-    fileAccept=".docx,.pdf,image/*"
-    fileLimit="2" 
-    [(ngModel)]="myModel"
-    (acceptedFile)="onAccept($event)"
-    (deletedFile)="onDelete($event)"
-    (removedFile)="onRemove($event)">
+    inputId="files"
+    placeholder="My files"
+    [(ngModel)]="myModel">
 </input-file>
 
 <input-file 
     inputId="images"
-    fileAccept=".docx,.pdf,image/*"
-    fileLimit="2" 
-    formControlName="myField"
-    (acceptedFile)="onAccept($event)"
-    (deletedFile)="onDelete($event)"
-    (removedFile)="onRemove($event)">
+    placeholder="Pictures"
+    formControlName="myField">
 </input-file> 
 ```
 
@@ -102,12 +94,12 @@ constructor(
     private http: HttpClient
 ) {}
 
-public post(file: any): Observable<any> {
+public post(file: InputFile): Observable<YourClass> {
     const apiUrl = 'my-url';
     const formData = new FormData();
     formData.append('file', file.file, file.file.name);
-    return this.http.post(apiUrl, formData)
-        .map(res => <any>res);
+    return this.http.post<YourClass>(apiUrl, formData).pipe(
+        .catchError(...)
 }
 ```
 
