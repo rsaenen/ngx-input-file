@@ -1,3 +1,6 @@
+### [2.0.2]
+- Fix set of the preview when an InputFile has no file.
+
 ### [2.0.1]
 - Adding a placeholder
 - Adding an identifier and the File to InputFile dto.

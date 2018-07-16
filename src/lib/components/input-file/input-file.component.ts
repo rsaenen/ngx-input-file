@@ -211,7 +211,7 @@ export class InputFileComponent implements ControlValueAccessor {
      */
     public setFilePreview(): void {
         for (const index in this.files) {
-            if (this.inputFileService.typeGuard(this.files[index].file, 'image/*')) {
+            if (this.files[index].file != null && this.inputFileService.typeGuard(this.files[index].file, 'image/*')) {
                 const fr = new FileReader();
                 fr.onload = () => {
                     this.files[index].preview = fr.result;
