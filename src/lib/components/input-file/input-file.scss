@@ -19,12 +19,14 @@
             width: $width;
         }
 
-        .delete-button {
+        .secondary-button {
             width: $width;
         }
 
         .file-button {
             @extend %common-container;
+
+            flex: 1;
         }
 
         .file-container {
@@ -60,6 +62,26 @@
             font-size: calc(#{$width} / 4);
             height: calc(#{$width} / 4);
             width: calc(#{$width} / 4);
+        }
+
+        .form-link {
+            display: flex;
+            flex-direction: column;
+            width: $width;
+        }
+
+        .input-link {
+            width: $width;
+        }
+
+        .form-link-button {
+            display: flex;
+            flex-direction: row;
+
+            .mat-button {
+                min-width: calc(#{$width} / 2);
+                width: calc(#{$width} / 2);
+            }
         }
 
         .mat-orphan-label {
@@ -120,6 +142,23 @@
     .bounce-in {
         animation-duration: .75s;
         animation-name: bounceIn;
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .slide-in-up {
+        animation-duration: .25s;
+        animation-name: slideInUp;
     }
 }
 

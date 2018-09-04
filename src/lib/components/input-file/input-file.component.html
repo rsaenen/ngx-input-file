@@ -4,30 +4,59 @@
 
         <ng-container *ngFor="let file of files; let i = index">
             <div class="file-container bounce-in">
-                <button mat-button inputFileDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, i,replaceButton)"
-                    [disabled]="disabled" (itemDragOver)="onDragOver(replaceButton)" (itemDragLeave)="onDragLeave(replaceButton)"
-                    #replaceButton>
-                    <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
-                    <ng-template #noPreview>
-                        <mat-icon class="input-icon">insert_drive_file</mat-icon>
-                        <div class="file-name text-truncate" [innerHtml]="file.file.name" *ngIf="file.file"></div>
-                    </ng-template>
-
-                </button>
-                <button mat-button class="delete-button" type="button" (click)="onDeleteFile(i)" [disabled]="disabled">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                <ng-container *ngTemplateOutlet="fileTemplate; context: { $implicit: file }"></ng-container>
             </div>
-            <input [accept]="fileAccept" hidden type="file" #fileReplace (change)="onReplaceFile($event.target.files, i, replaceButton, fileReplace)">
         </ng-container>
 
         <ng-container *ngIf="canAddFile">
-            <button mat-button inputFileDropZone class="file-button" type="button" (click)="fileInput.click()" (itemDrop)="onSelectFile($event, selectButton)"
-                (itemDragOver)="onDragOver(selectButton)" (itemDragLeave)="onDragLeave(selectButton)" [disabled]="disabled" #selectButton>
-                <mat-icon class="input-icon">add</mat-icon>
-            </button>
-            <input [id]="inputId" [accept]="fileAccept" hidden type="file" [attr.multiple]="fileLimit > 1 ? true : null" #fileInput (change)="onSelectFile($event.target.files, selectButton)">
+            <div class="file-container">
+                <ng-container *ngIf="!addLink; else linkTemplate">
+                    <ng-container *ngTemplateOutlet="addTemplate"></ng-container>
+                </ng-container>
+            </div>
         </ng-container>
     </div>
 
 </div>
+
+<ng-template #addTemplate>
+    <button mat-button inputFileDropZone class="file-button" type="button" (click)="fileInput.click()" (itemDrop)="onSelectFile($event, selectButton)"
+        (itemDragOver)="onDragOver(selectButton)" (itemDragLeave)="onDragLeave(selectButton)" [disabled]="disabled" #selectButton>
+        <mat-icon class="input-icon">{{ iconAdd }}</mat-icon>
+    </button>
+    <button mat-button class="secondary-button" type="button" [disabled]="disabled" (click)="onLink()" *ngIf="linkEnabled">
+        <mat-icon>{{ iconLink }}</mat-icon>
+    </button>
+    <input [id]="inputId" [accept]="fileAccept" hidden type="file" [attr.multiple]="fileLimit > 1 ? true : null" #fileInput (change)="onSelectFile($event.target.files, selectButton)">
+</ng-template>
+
+<ng-template #fileTemplate let-file>
+    <button mat-button inputFileDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, i,replaceButton)"
+        [disabled]="disabled" (itemDragOver)="onDragOver(replaceButton)" (itemDragLeave)="onDragLeave(replaceButton)" #replaceButton>
+        <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
+        <ng-template #noPreview>
+            <mat-icon class="input-icon">{{ iconFile }}</mat-icon>
+            <div class="file-name text-truncate" [innerHtml]="file.file.name" *ngIf="file.file"></div>
+        </ng-template>
+    </button>
+    <button mat-button class="secondary-button" type="button" (click)="onDeleteFile(i)" [disabled]="disabled">
+        <mat-icon>{{ iconDelete }}</mat-icon>
+    </button>
+    <input [accept]="fileAccept" hidden type="file" #fileReplace (change)="onReplaceFile($event.target.files, i, replaceButton, fileReplace)">
+</ng-template>
+
+<ng-template #linkTemplate>
+    <form class="form-link slide-in-up" [formGroup]="form" novalidate>
+        <mat-form-field class="input-link">
+            <input matInput formControlName="link" placeholder="Link">
+        </mat-form-field>
+        <div class="form-link-button">
+            <button mat-button type="button" (click)="onLink()" [disabled]="disabled">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <button mat-button type="submit" [disabled]="disabled">
+                <mat-icon>check</mat-icon>
+            </button>
+        </div>
+    </form>
+</ng-template>

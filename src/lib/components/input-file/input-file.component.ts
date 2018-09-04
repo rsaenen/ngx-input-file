@@ -1,10 +1,22 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputFile } from '../../dto/input-file';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    OnInit,
+    Output,
+    ViewChild
+    } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { defaultSettings } from '../../settings/default.settings';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { InputFile } from '../../interfaces/input-file';
 import { InputFileRejected } from '../../interfaces/input-file-rejected';
 import { InputFileRejectedReason } from '../../enums/input-file-rejected-reason';
 import { InputFileService } from '../../services/input-file.service';
 import { MatButton } from '@angular/material/button';
+import { urlValidator } from '../../validators/url.validator';
 
 @Component({
     selector: 'input-file',
@@ -18,9 +30,14 @@ import { MatButton } from '@angular/material/button';
         }
     ]
 })
-export class InputFileComponent implements ControlValueAccessor {
+export class InputFileComponent implements ControlValueAccessor, OnInit {
     private _fileAccept: string;
     private _fileLimit: number;
+    private _iconAdd: string;
+    private _iconDelete: string;
+    private _iconFile: string;
+    private _iconLink: string;
+    private _linkEnabled: boolean;
     private _sizeLimit: number;
 
     @Input() disabled: boolean;
@@ -32,7 +49,7 @@ export class InputFileComponent implements ControlValueAccessor {
     }
 
     get fileAccept() {
-        return this._fileAccept || this.inputFileService.config.fileAccept || '*';
+        return this._fileAccept || this.inputFileService.config.fileAccept || defaultSettings.fileAccept;
     }
 
     @Input() set fileLimit(fileLimit: number) {
@@ -40,7 +57,47 @@ export class InputFileComponent implements ControlValueAccessor {
     }
 
     get fileLimit() {
-        return this._fileLimit || this.inputFileService.config.fileLimit || 1;
+        return this._fileLimit || this.inputFileService.config.fileLimit || defaultSettings.fileLimit;
+    }
+
+    @Input() set iconAdd(iconAdd: string) {
+        this._iconAdd = iconAdd;
+    }
+
+    get iconAdd() {
+        return this._iconAdd || this.inputFileService.config.iconAdd || defaultSettings.iconAdd;
+    }
+
+    @Input() set iconDelete(iconDelete: string) {
+        this._iconDelete = iconDelete;
+    }
+
+    get iconDelete() {
+        return this._iconDelete || this.inputFileService.config.iconDelete || defaultSettings.iconDelete;
+    }
+
+    @Input() set iconFile(iconFile: string) {
+        this._iconFile = iconFile;
+    }
+
+    get iconFile() {
+        return this._iconFile || this.inputFileService.config.iconFile || defaultSettings.iconFile;
+    }
+
+    @Input() set iconLink(iconLink: string) {
+        this._iconLink = iconLink;
+    }
+
+    get iconLink() {
+        return this._iconLink || this.inputFileService.config.iconLink || defaultSettings.iconLink;
+    }
+
+    @Input() set linkEnabled(linkEnabled: boolean) {
+        this._linkEnabled = linkEnabled;
+    }
+
+    get linkEnabled() {
+        return this._linkEnabled || this.inputFileService.config.linkEnabled || defaultSettings.linkEnabled;
     }
 
     @Input() set sizeLimit(sizeLimit: number) {
@@ -48,7 +105,7 @@ export class InputFileComponent implements ControlValueAccessor {
     }
 
     get sizeLimit() {
-        return this._sizeLimit || this.inputFileService.config.sizeLimit || null;
+        return this._sizeLimit || this.inputFileService.config.sizeLimit || defaultSettings.sizeLimit;
     }
 
     @Output() acceptedFile = new EventEmitter<InputFile>();
@@ -56,7 +113,9 @@ export class InputFileComponent implements ControlValueAccessor {
     @Output() rejectedFile = new EventEmitter<InputFileRejected>();
     @ViewChild('fileInput') fileInput: ElementRef;
 
+    public addLink: boolean;
     public files = new Array<InputFile>();
+    public form: FormGroup;
     public onChange = (files: Array<InputFile>) => { };
     public onTouched = () => { };
 
@@ -65,8 +124,16 @@ export class InputFileComponent implements ControlValueAccessor {
     }
 
     constructor(
+        private formBuilder: FormBuilder,
         private inputFileService: InputFileService
     ) { }
+
+    /**
+     * Angular lifecyle OnInit implementation.
+     */
+    public ngOnInit(): void {
+        this.setForm();
+    }
 
     /**
      * On delete a file event handler.
@@ -98,6 +165,13 @@ export class InputFileComponent implements ControlValueAccessor {
     }
 
     /**
+     * On adds a link.
+     */
+    public onLink(): void {
+        this.addLink = !this.addLink;
+    }
+
+    /**
      * On replace one file event handler.
      * Writes the value.
      * @param fileList
@@ -109,7 +183,7 @@ export class InputFileComponent implements ControlValueAccessor {
             // Copies the array without reference.
             const files = this.files.slice();
             // Assumes that a single file can be replaced by a single file.
-            const inputFile = new InputFile(null, null, fileList.item(0));
+            const inputFile: InputFile = { file: fileList.item(0) };
             button.ripple.fadeOutAll();
             if (this.fileGuard(files, inputFile, true)) {
                 files[index] = inputFile;
@@ -133,7 +207,7 @@ export class InputFileComponent implements ControlValueAccessor {
             // Copies the array without reference.
             const files = this.files.slice();
             Array.from(fileList).forEach(file => {
-                const inputFile = new InputFile(null, null, file);
+                const inputFile: InputFile = { file: file };
                 if (this.fileGuard(files, inputFile)) {
                     files.push(inputFile);
                     this.acceptedFile.emit(inputFile);
@@ -205,11 +279,10 @@ export class InputFileComponent implements ControlValueAccessor {
         return true;
     }
 
-
     /**
      * Sets the file preview with FileReader.
      */
-    public setFilePreview(): void {
+    private setFilePreview(): void {
         for (const index in this.files) {
             if (this.files[index].file != null && this.inputFileService.typeGuard(this.files[index].file, 'image/*')) {
                 const fr = new FileReader();
@@ -219,5 +292,14 @@ export class InputFileComponent implements ControlValueAccessor {
                 fr.readAsDataURL(this.files[index].file);
             }
         }
+    }
+
+    /**
+     * Sets the reactive form to insert a link.
+     */
+    private setForm(): void {
+        this.form = this.formBuilder.group({
+            link: ['', [Validators.required, urlValidator]]
+        });
     }
 }
