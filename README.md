@@ -19,13 +19,15 @@ npm install ngx-input-file --save
 ## Basic Configuration
 ```typescript
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 
 const config: InputFileConfig = {};
 
 @NgModule({
     imports: [
-        ... 
+        ...
+        BrowserAnimationsModule,
         InputFileModule.forRoot(config),
         ...
     ],
@@ -80,14 +82,12 @@ These settings will overide the configuration defined with `forRoot()` method.
 ## Example
 
 ```html
-<input-file 
-    inputId="files"
+<input-file
     placeholder="My files"
     [(ngModel)]="myModel">
 </input-file>
 
-<input-file 
-    inputId="images"
+<input-file
     placeholder="Pictures"
     formControlName="myField">
 </input-file> 

@@ -1,4 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DropZoneDirective } from './directives/drop-zone/drop-zone.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +16,6 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
         InputFileComponent
     ],
     imports: [
-        BrowserAnimationsModule,
         CommonModule,
         FormsModule,
         MatButtonModule,

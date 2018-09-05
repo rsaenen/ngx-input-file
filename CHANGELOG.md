@@ -1,4 +1,7 @@
 ### [2.1.1]
+- Switch BrowserAnimationsModule from AppModule to DemoModule
+
+### [2.1.1]
 - Minor fix link form validation
 
 ### [2.1.0]
