@@ -232,7 +232,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
      * On submit the link form event handler.
      */
     public onSubmitLink(): void {
-        if (!this.disabled) {
+        if (!this.disabled && this.form.valid) {
             const files = this.files.slice();
             const inputFile: InputFile = { link: this.form.value.link, preview: this.form.value.link };
             files.push(inputFile);

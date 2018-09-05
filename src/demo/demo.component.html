@@ -7,22 +7,22 @@
     <div class="row">
         <div class="col-12">
             <pre>Configuration - fileAccept: '*', fileLimit: 4</pre>
-            <input-file inputId="input-file" placeholder="Your files"></input-file>
+            <input-file placeholder="Your files"></input-file>
         </div>
 
         <div class="col-12">
             <pre>Configuration - fileAccept: 'image/*', fileLimit: 2</pre>
-            <input-file inputId="input-file" fileAccept="image/*" fileLimit="2" placeholder="My favorite album photo"></input-file>
+            <input-file fileAccept="image/*" fileLimit="2" placeholder="My favorite album photo"></input-file>
         </div>
 
         <div class="col-12">
             <pre>Configuration - fileAccept: 'image/*', fileLimit: 2, linkEnabled: true</pre>
-            <input-file inputId="input-file" fileAccept="image/*" fileLimit="2" [linkEnabled]="true" placeholder="Could be a link"></input-file>
+            <input-file fileAccept="image/*" fileLimit="2" [linkEnabled]="true" placeholder="Could be a link"></input-file>
         </div>
 
         <div class="col-12">
             <pre>Configuration - disabled: true</pre>
-            <input-file inputId="input-file" [disabled]="true"></input-file>
+            <input-file [disabled]="true"></input-file>
         </div>
     </div>
 </div>

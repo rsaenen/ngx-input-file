@@ -1,4 +1,8 @@
+### [2.1.1]
+- Minor fix link form validation
+
 ### [2.1.0]
+- Drop attribute InputId (auto generated now)
 - Updating the dependencies
 - Adding of link options to add an InputFile from an url 
 - Drop class InputFile to an interface
