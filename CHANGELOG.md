@@ -1,3 +1,9 @@
+### [2.1.0]
+- Updating the dependencies
+- Adding of link options to add an InputFile from an url 
+- Drop class InputFile to an interface
+- Issue #12 How to override style and icon?
+
 ### [2.0.2]
 - Fix set of the preview when an InputFile has no file.
 

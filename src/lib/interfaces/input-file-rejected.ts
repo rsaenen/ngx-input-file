@@ -1,4 +1,4 @@
-import { InputFile } from '../dto/input-file';
+import { InputFile } from '../interfaces/input-file';
 import { InputFileRejectedReason } from '../enums/input-file-rejected-reason';
 
 export interface InputFileRejected {

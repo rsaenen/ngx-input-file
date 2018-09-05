@@ -6,5 +6,6 @@ export const defaultSettings = {
     iconFile: 'insert_drive_file',
     iconLink: 'link',
     linkEnabled: false,
+    placeholderLink: 'Link',
     sizeLimit: null
 };

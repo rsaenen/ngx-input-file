@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { InputFile } from '../dto/input-file';
+import { InputFile } from '../interfaces/input-file';
 import { InputFileConfig } from '../interfaces/input-file-config';
 
 @Injectable({

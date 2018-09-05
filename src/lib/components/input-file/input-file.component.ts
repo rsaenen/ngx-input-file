@@ -31,6 +31,7 @@ import { urlValidator } from '../../validators/url.validator';
     ]
 })
 export class InputFileComponent implements ControlValueAccessor, OnInit {
+    static nextId = 0;
     private _fileAccept: string;
     private _fileLimit: number;
     private _iconAdd: string;
@@ -38,10 +39,10 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
     private _iconFile: string;
     private _iconLink: string;
     private _linkEnabled: boolean;
+    private _placeholderLink: string;
     private _sizeLimit: number;
 
     @Input() disabled: boolean;
-    @Input() inputId: string;
     @Input() placeholder: string;
 
     @Input() set fileAccept(fileAccept: string) {
@@ -100,6 +101,14 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
         return this._linkEnabled || this.inputFileService.config.linkEnabled || defaultSettings.linkEnabled;
     }
 
+    @Input() set placeholderLink(placeholderLink: string) {
+        this._placeholderLink = placeholderLink;
+    }
+
+    get placeholderLink() {
+        return this._placeholderLink || this.inputFileService.config.placeholderLink || defaultSettings.placeholderLink;
+    }
+
     @Input() set sizeLimit(sizeLimit: number) {
         this._sizeLimit = sizeLimit;
     }
@@ -116,6 +125,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
     public addLink: boolean;
     public files = new Array<InputFile>();
     public form: FormGroup;
+    public id = `ngx-input-file-${InputFileComponent.nextId++}`;
     public onChange = (files: Array<InputFile>) => { };
     public onTouched = () => { };
 
@@ -215,6 +225,21 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
             });
             this.writeValue(files);
             this.fileInput.nativeElement.value = '';
+        }
+    }
+
+    /**
+     * On submit the link form event handler.
+     */
+    public onSubmitLink(): void {
+        if (!this.disabled) {
+            const files = this.files.slice();
+            const inputFile: InputFile = { link: this.form.value.link, preview: this.form.value.link };
+            files.push(inputFile);
+            this.acceptedFile.emit(inputFile);
+            this.onLink();
+            this.form.reset();
+            this.writeValue(files);
         }
     }
 

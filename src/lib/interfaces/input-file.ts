@@ -1,6 +1,6 @@
 export interface InputFile {
     id?: any;
-    file: File;
+    file?: File;
     link?: string;
-    preview?: string;
+    preview?: string | ArrayBuffer;
 }

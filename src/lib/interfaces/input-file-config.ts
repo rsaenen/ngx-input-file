@@ -6,5 +6,6 @@ export interface InputFileConfig {
     iconFile?: string;
     iconLink?: string;
     linkEnabled?: boolean;
+    placeholderLink?: string;
     sizeLimit?: number;
 }

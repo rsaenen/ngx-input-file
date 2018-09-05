@@ -48,23 +48,34 @@ These settings will overide the configuration defined with `forRoot()` method.
 
 | Attribute               | Type                    | Description                              |
 | ----------------------- |:-----------------------:| :---------------------------------------- |
-| inputId                 | string                  | The attribute identifier of the html element input. |
-| fileAccept              | string                  | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
-| fileLimit               | number                  | The maximum files that the user can upload. |
-| sizeLimit               | number                  | The maximum size of the file (kB). |
-| disabled                | boolean                 | Whether the component is disabled. |
-| placeholder             | string                  | The placeholder of the component. |
+| fileAccept              | Input - string                  | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
+| fileLimit               | Input - number                  | The maximum files that the user can upload. |
+| iconAdd                   | Input - string                | The icon for add. |
+| iconDelete               | Input - string           | The icon for add. |
+| iconFile               | Input - string               | The icon for file. |
+| iconLink               | Input - string       | The icon for link. |
+| linkEnabled               | Input - boolean      | Whether adding is url is enabled. |
+| placeholderLink               | Input - string      | The placeholder for the link input. |
+| sizeLimit               | Input - number                  | The maximum size of the file (kB). |
+| disabled                | Input - boolean                 | Whether the component is disabled. |
+| placeholder             | Input - string                  | The placeholder of the component. |
 | ngModel/formControlname | Array<InputFile>        | Template driven or reactive form works. 
-| acceptedFile            | EventEmitter<InputFile> | Triggered when a file is accepted. |
-| deletedFile             | EventEmitter<InputFile> | Triggered when a file is deleted. |
-| rejectedFile            | EventEmitter<InputFile> | Triggered when a file is rejected. |
+| acceptedFile            | Output - InputFile | Triggered when a file is accepted. |
+| deletedFile             | Output - InputFile | Triggered when a file is deleted. |
+| rejectedFile            | Output - InputFile | Triggered when a file is rejected. |
 
 ### Configuration Attributes
-| Attribute               | Type                    | Description                              |
-| ----------------------- |:-----------------------:| :---------------------------------------- |
-| fileAccept              | number                 | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
-| fileLimit               | number                  | The maximum files that the user can upload. |
-| sizeLimit               | number                  | The maximum size of the file (kB). |
+| Attribute               | Type        | Default         | Description                              |
+| ----------------------- |:----------: |:-------------:| :---------------------------------------- |
+| fileAccept              | string      | '*'        | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
+| fileLimit                 | number      | 1          | The maximum files that the user can upload. |
+| iconAdd                   | string        | 'add'          | The icon for add. |
+| iconDelete               | string     | 'delete'             | The icon for add. |
+| iconFile               | string       | 'insert_drive_file'           | The icon for file. |
+| iconLink               | string       | 'link'         | The icon for link. |
+| linkEnabled               | boolean    | false              | Whether adding is url is enabled. |
+| placeholderLink               | string    | 'Link'              | The placeholder for the link input. |
+| sizeLimit               | number      | null     | The maximum size of the file (kB). |
 
 ## Example
 
