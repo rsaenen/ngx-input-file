@@ -1,4 +1,7 @@
-### [2.1.1]
+### [2.1.3]
+- Issue #14 Has no exported member 'InputFileConfig'.
+
+### [2.1.2]
 - Switch BrowserAnimationsModule from AppModule to DemoModule
 
 ### [2.1.1]
