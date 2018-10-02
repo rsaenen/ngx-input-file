@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "name": "ngx-input-file",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Angular Input File Component",
   "license": "MIT",
   "repository": {
@@ -37,12 +37,12 @@
     }
   },
   "peerDependencies": {
+    "@angular/animations": "^6.1.0",
     "@angular/cdk": "^6.4.0",
     "@angular/core": "^6.1.0",
     "@angular/common": "^6.1.0",
     "@angular/forms": "^6.1.0",
-    "@angular/material": "^6.4.0",
-    "material-design-icons": "^3.0.0"
+    "@angular/material": "^6.4.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.5",

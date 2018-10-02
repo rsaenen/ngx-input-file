@@ -1,3 +1,6 @@
+### [2.1.4]
+- Issue #15 Stackblitz example not working
+
 ### [2.1.3]
 - Issue #14 Has no exported member 'InputFileConfig'.
 
