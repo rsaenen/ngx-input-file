@@ -1,3 +1,7 @@
+### [7.0.0]
+- Update dependencies and support Angular 7.
+- Version will follow the Angular version.
+
 ### [2.1.4]
 - Issue #15 Stackblitz example not working
 
