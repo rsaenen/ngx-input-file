@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { DemoComponent } from './demo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputFileConfig } from '../lib/interfaces/input-file-config';
 import { InputFileModule } from '../lib/input-file.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,7 +27,8 @@ const routes: Routes = [
         FormsModule,
         InputFileModule.forRoot(config),
         MatToolbarModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule
     ],
     declarations: [DemoComponent],
     bootstrap: [DemoComponent],

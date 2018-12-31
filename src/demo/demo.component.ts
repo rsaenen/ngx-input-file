@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'demo',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class DemoComponent {
-    public model = new Array<File>();
+    public control = new FormControl([{
+        preview: 'https://www.planwallpaper.com/static/images/Nikon-D810-Image-Sample-6.jpg'
+    }]);
 }
