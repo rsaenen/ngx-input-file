@@ -1,3 +1,7 @@
+### [7.0.1]
+- Remove disabled guard on writeValue
+- Issue #16 ngx-input-file with reactive forms 
+
 ### [7.0.0]
 - Update dependencies and support Angular 7.
 - Version will follow the Angular version.

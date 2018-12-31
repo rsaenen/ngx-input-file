@@ -272,11 +272,12 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
      * @param files
      */
     public writeValue(files: Array<InputFile>): void {
-        if (!this.disabled) {
-            this.files = files;
-            this.setFilePreview();
-            this.onChange(this.files);
+        if (!files) {
+            files = new Array<InputFile>();
         }
+        this.files = files;
+        this.setFilePreview();
+        this.onChange(this.files);
     }
 
     /**
