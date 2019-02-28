@@ -3,7 +3,7 @@
     <div class="files-container">
 
         <ng-container *ngFor="let file of files; let i = index">
-            <div class="file-container bounce-in">
+            <div class="file-container" [ngClass]="classAnimation">
                 <ng-container *ngTemplateOutlet="fileTemplate; context: { $implicit: file, index: i }"></ng-container>
             </div>
         </ng-container>

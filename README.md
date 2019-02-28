@@ -61,6 +61,7 @@ These settings will overide the configuration defined with `forRoot()` method.
 | sizeLimit               | Input - number                  | The maximum size of the file (kB). |
 | disabled                | Input - boolean                 | Whether the component is disabled. |
 | placeholder             | Input - string                  | The placeholder of the component. |
+| classAnimation          | Input - string                  | The class of the image container which allow to animate the container when select or drop a file. |
 | ngModel/formControlname | Array<InputFile>        | Template driven or reactive form works. 
 | acceptedFile            | Output - InputFile | Triggered when a file is accepted. |
 | deletedFile             | Output - InputFile | Triggered when a file is deleted. |
@@ -69,6 +70,7 @@ These settings will overide the configuration defined with `forRoot()` method.
 ### Configuration Attributes
 | Attribute               | Type        | Default         | Description                              |
 | ----------------------- |:----------: |:-------------:| :---------------------------------------- |
+| classAnimation          | string      | 'bounce-in' | The class of the image container which allow to animate the container when select or drop a file. |
 | fileAccept              | string      | '*'        | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
 | fileLimit                 | number      | 1          | The maximum files that the user can upload. |
 | iconAdd                   | string        | 'add'          | The icon for add. |

@@ -32,6 +32,7 @@ import { urlValidator } from '../../validators/url.validator';
 })
 export class InputFileComponent implements ControlValueAccessor, OnInit {
     static nextId = 0;
+    private _classAnimation: string;
     private _fileAccept: string;
     private _fileLimit: number;
     private _iconAdd: string;
@@ -44,6 +45,14 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
 
     @Input() disabled: boolean;
     @Input() placeholder: string;
+
+    @Input() set classAnimation(classAnimation: string) {
+        this._classAnimation = classAnimation;
+    }
+
+    get classAnimation() {
+        return this._classAnimation || this.inputFileService.config.classAnimation || defaultSettings.classAnimation;
+    }
 
     @Input() set fileAccept(fileAccept: string) {
         this._fileAccept = fileAccept;
