@@ -1,4 +1,5 @@
 export interface InputFileConfig {
+    classAnimation?: string;
     fileAccept?: string;
     fileLimit?: number;
     iconAdd?: string;

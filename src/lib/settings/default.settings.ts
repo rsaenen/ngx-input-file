@@ -1,4 +1,5 @@
 export const defaultSettings = {
+    classAnimation: 'bounce-in',
     fileAccept: '*',
     fileLimit: 1,
     iconAdd: 'add',

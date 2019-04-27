@@ -34,6 +34,7 @@
 
             flex-direction: column;
             margin-right: 1rem;
+            overflow: hidden;
         }
 
         .replace-button {
@@ -52,10 +53,11 @@
         }
 
         .image-preview {
-            margin: 0 -16px;
+            position: absolute;
             height: $height;
             object-fit: contain;
             width: $width;
+            z-index: -1;
         }
 
         .input-icon {

@@ -1,3 +1,9 @@
+### [7.0.3]
+- Fix display issue.
+
+### [7.0.2]
+- The class animation can be set.
+
 ### [7.0.1]
 - Remove disabled guard on writeValue
 - Issue #16 ngx-input-file with reactive forms 

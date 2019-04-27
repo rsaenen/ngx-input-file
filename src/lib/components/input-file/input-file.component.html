@@ -3,7 +3,7 @@
     <div class="files-container">
 
         <ng-container *ngFor="let file of files; let i = index">
-            <div class="file-container bounce-in">
+            <div class="file-container" [ngClass]="classAnimation">
                 <ng-container *ngTemplateOutlet="fileTemplate; context: { $implicit: file, index: i }"></ng-container>
             </div>
         </ng-container>
@@ -31,9 +31,9 @@
 </ng-template>
 
 <ng-template #fileTemplate let-file let-index="index">
+    <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
     <button mat-button inputFileDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, index, replaceButton)"
         [disabled]="disabled" (itemDragOver)="onDragOver(replaceButton)" (itemDragLeave)="onDragLeave(replaceButton)" #replaceButton>
-        <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
         <ng-template #noPreview>
             <mat-icon class="input-icon">{{ iconFile }}</mat-icon>
             <div class="file-name text-truncate" [innerHtml]="file.file.name" *ngIf="file.file"></div>
