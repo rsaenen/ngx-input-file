@@ -1,3 +1,6 @@
+### [7.0.4]
+- Fix prefill image displaying issue.
+
 ### [7.0.3]
 - Fix display issue.
 
