@@ -1,4 +1,7 @@
-### [7.0.1]
+### [7.0.3]
+- Fix display issue.
+
+### [7.0.2]
 - The class animation can be set.
 
 ### [7.0.1]

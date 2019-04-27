@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "name": "ngx-input-file",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "Angular Input File Component",
   "license": "MIT",
   "repository": {
