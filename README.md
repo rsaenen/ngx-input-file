@@ -53,7 +53,7 @@ These settings will overide the configuration defined with `forRoot()` method.
 | fileAccept              | Input - string                  | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
 | fileLimit               | Input - number                  | The maximum files that the user can upload. |
 | iconAdd                   | Input - string                | The icon for add. |
-| iconDelete               | Input - string           | The icon for add. |
+| iconDelete               | Input - string           | The icon for delete. |
 | iconFile               | Input - string               | The icon for file. |
 | iconLink               | Input - string       | The icon for link. |
 | linkEnabled               | Input - boolean      | Whether adding is url is enabled. |
