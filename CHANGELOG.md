@@ -1,3 +1,6 @@
+### [8.0.0]
+- Release 8.0.0 - support Angular 8.
+
 ### [7.0.4]
 - Fix prefill image displaying issue.
 
