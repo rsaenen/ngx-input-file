@@ -129,7 +129,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
     @Output() acceptedFile = new EventEmitter<InputFile>();
     @Output() deletedFile = new EventEmitter<InputFile>();
     @Output() rejectedFile = new EventEmitter<InputFileRejected>();
-    @ViewChild('fileInput') fileInput: ElementRef;
+    @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
 
     public addLink: boolean;
     public files = new Array<InputFile>();
@@ -202,7 +202,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
             // Copies the array without reference.
             const files = this.files.slice();
             // Assumes that a single file can be replaced by a single file.
-            const inputFile: InputFile = { file: fileList.item(0) };
+            const inputFile: InputFile = { file : fileList.item(0) };
             button.ripple.fadeOutAll();
             if (this.fileGuard(files, inputFile, true)) {
                 files[index] = inputFile;
@@ -226,7 +226,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
             // Copies the array without reference.
             const files = this.files.slice();
             Array.from(fileList).forEach(file => {
-                const inputFile: InputFile = { file: file };
+                const inputFile: InputFile = { file };
                 if (this.fileGuard(files, inputFile)) {
                     files.push(inputFile);
                     this.acceptedFile.emit(inputFile);
@@ -297,17 +297,17 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
      */
     private fileGuard(files: Array<InputFile>, file: InputFile, bypassLimit?: boolean): boolean {
         if (!bypassLimit && !this.inputFileService.limitGuard(files, this.fileLimit)) {
-            this.rejectedFile.emit({ reason: InputFileRejectedReason.limitReached, file: file });
+            this.rejectedFile.emit({ reason: InputFileRejectedReason.limitReached, file });
             return false;
         }
 
         if (!this.inputFileService.sizeGuard(file.file, this.sizeLimit)) {
-            this.rejectedFile.emit({ reason: InputFileRejectedReason.sizeReached, file: file });
+            this.rejectedFile.emit({ reason: InputFileRejectedReason.sizeReached, file });
             return false;
         }
 
         if (!this.inputFileService.typeGuard(file.file, this.fileAccept)) {
-            this.rejectedFile.emit({ reason: InputFileRejectedReason.badFile, file: file });
+            this.rejectedFile.emit({ reason: InputFileRejectedReason.badFile, file });
             return false;
         }
 
