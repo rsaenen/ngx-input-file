@@ -31,13 +31,13 @@
 </ng-template>
 
 <ng-template #fileTemplate let-file let-index="index">
-    <img class="image-preview" [src]="file.preview" *ngIf="file.preview; else noPreview">
+    <img class="image-preview" [src]="file.preview" *ngIf="file.preview">
     <button mat-button inputFileDropZone class="replace-button" type="button" (click)="fileReplace.click()" (itemDrop)="onReplaceFile($event, index, replaceButton)"
         [disabled]="disabled" (itemDragOver)="onDragOver(replaceButton)" (itemDragLeave)="onDragLeave(replaceButton)" #replaceButton>
-        <ng-template #noPreview>
+        <ng-container *ngIf="!file.preview">
             <mat-icon class="input-icon">{{ iconFile }}</mat-icon>
             <div class="file-name text-truncate" [innerHtml]="file.file.name" *ngIf="file.file"></div>
-        </ng-template>
+        </ng-container>
     </button>
     <button mat-button class="secondary-button" type="button" (click)="onDeleteFile(index)" [disabled]="disabled">
         <mat-icon>{{ iconDelete }}</mat-icon>
