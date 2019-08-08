@@ -24,7 +24,7 @@ export class DropZoneDirective {
      * @param event
      */
     @HostListener('dragover', ['$event'])
-    public onDragOver(event: DragEvent): void {
+    public onDragOver(event: any): void {
         this.preventAndStopEventPropagation(event);
         if (!this.isOver && !this.disabled) {
             this.isOver = true;
@@ -37,7 +37,7 @@ export class DropZoneDirective {
      * @param event
      */
     @HostListener('dragleave', ['$event'])
-    public onDragLeave(event: DragEvent): void {
+    public onDragLeave(event: any): void {
         this.preventAndStopEventPropagation(event);
         if (this.isOver && this.isTrueLeave(event) && !this.disabled) {
             this.isOver = false;
@@ -51,7 +51,7 @@ export class DropZoneDirective {
      */
     @HostListener('drop', ['$event'])
     public onDrop(event: any): void {
-        if (!this.disabled && event instanceof DragEvent) {
+        if (!this.disabled) {
             this.preventAndStopEventPropagation(event);
             this.isOver = false;
             try {
@@ -75,7 +75,7 @@ export class DropZoneDirective {
      * Checks if the leave is not trigger by a children.
      * @param event
      */
-    private isTrueLeave(event: DragEvent): boolean {
+    private isTrueLeave(event: any): boolean {
         for (const c of this.whiteListClasses) {
             if (event.fromElement != null && event.fromElement.className.indexOf(c) >= 0) {
                 return false;
