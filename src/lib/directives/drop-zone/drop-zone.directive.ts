@@ -51,7 +51,7 @@ export class DropZoneDirective {
      */
     @HostListener('drop', ['$event'])
     public onDrop(event: any): void {
-        if (!this.disabled && event instanceof any) {
+        if (!this.disabled) {
             this.preventAndStopEventPropagation(event);
             this.isOver = false;
             try {
