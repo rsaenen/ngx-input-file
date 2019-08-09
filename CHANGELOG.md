@@ -1,3 +1,6 @@
+### [8.0.1]
+- Issue #28 Drag/Drop does not work with Safari #28
+
 ### [8.0.0]
 - Release 8.0.0 - support Angular 8.
 
