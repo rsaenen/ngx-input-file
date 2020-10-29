@@ -1,0 +1,15 @@
+{
+    "name": "ngx-input-file",
+    "version": "9.0.0",
+    "peerDependencies": {
+        "@angular/cdk": "^9.2.4",
+        "@angular/animations": "^9.1.12",
+        "@angular/material": "^9.2.4",
+        "@angular/common": "~9.1.12",
+        "@angular/core": "~9.1.12",
+        "@angular/forms": "~9.1.12"
+    },
+    "dependencies": {
+        "tslib": "^1.10.0"
+    }
+}

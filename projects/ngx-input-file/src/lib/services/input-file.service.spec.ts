@@ -5,7 +5,7 @@ import { InputFileService } from './input-file.service';
 describe('InputFileService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [InputFileService]
+            providers: [InputFileService, { provide: 'config', useValue: { } }]
         });
     });
 
