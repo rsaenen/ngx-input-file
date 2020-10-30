@@ -1,123 +1,27 @@
-# ngx-input-file
+# NgxInputFileLib
 
-**ngx-input-file** is a module to replace the html element input file with Material Design.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.12.
 
-Try it with [Stackblitz](https://stackblitz.com/edit/ngx-input-file)!
+## Development server
 
-For the previous version with bootstrap: `ngx-input-file@1.0.4`.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Key features
-- Preview of the file
-- Drag and drop zone
-- Responsive
+## Code scaffolding
 
-## Installation 
-```bash
-npm install ngx-input-file --save
-```
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Basic Configuration
-```typescript
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+## Build
 
-const config: InputFileConfig = {};
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-@NgModule({
-    imports: [
-        ...
-        BrowserAnimationsModule,
-        InputFileModule.forRoot(config),
-        ...
-    ],
-    ...
-})
+## Running unit tests
 
-export class MyModule {}
-```
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Please include `material-design-icons` in your `angular.json`:
-```json
-"styles": [
-    "node_modules/material-design-icons/iconfont/material-icons.css",
-    "src/styles.scss"
-]
-```
+## Running end-to-end tests
 
-### Component Attributes
-These settings will overide the configuration defined with `forRoot()` method.  
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-| Attribute               | Type                    | Description                              |
-| ----------------------- |:-----------------------:| :---------------------------------------- |
-| fileAccept              | Input - string                  | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
-| fileLimit               | Input - number                  | The maximum files that the user can upload. |
-| iconAdd                   | Input - string                | The icon for add. |
-| iconDelete               | Input - string           | The icon for delete. |
-| iconFile               | Input - string               | The icon for file. |
-| iconLink               | Input - string       | The icon for link. |
-| linkEnabled               | Input - boolean      | Whether adding is url is enabled. |
-| placeholderLink               | Input - string      | The placeholder for the link input. |
-| sizeLimit               | Input - number                  | The maximum size of the file (kB). |
-| disabled                | Input - boolean                 | Whether the component is disabled. |
-| placeholder             | Input - string                  | The placeholder of the component. |
-| classAnimation          | Input - string                  | The class of the image container which allow to animate the container when select or drop a file. |
-| ngModel/formControlname | Array<InputFile>        | Template driven or reactive form works. 
-| acceptedFile            | Output - InputFile | Triggered when a file is accepted. |
-| deletedFile             | Output - InputFile | Triggered when a file is deleted. |
-| rejectedFile            | Output - InputFile | Triggered when a file is rejected. |
+## Further help
 
-### Configuration Attributes
-| Attribute               | Type        | Default         | Description                              |
-| ----------------------- |:----------: |:-------------:| :---------------------------------------- |
-| classAnimation          | string      | 'bounce-in' | The class of the image container which allow to animate the container when select or drop a file. |
-| fileAccept              | string      | '*'        | The attribute [accept](https://www.w3schools.com/tags/att_input_accept.asp) of the html element input. |
-| fileLimit                 | number      | 1          | The maximum files that the user can upload. |
-| iconAdd                   | string        | 'add'          | The icon for add. |
-| iconDelete               | string     | 'delete'             | The icon for add. |
-| iconFile               | string       | 'insert_drive_file'           | The icon for file. |
-| iconLink               | string       | 'link'         | The icon for link. |
-| linkEnabled               | boolean    | false              | Whether adding is url is enabled. |
-| placeholderLink               | string    | 'Link'              | The placeholder for the link input. |
-| sizeLimit               | number      | null     | The maximum size of the file (kB). |
-
-## Example
-
-```html
-<input-file
-    placeholder="My files"
-    [(ngModel)]="myModel">
-</input-file>
-
-<input-file
-    placeholder="Pictures"
-    formControlName="myField">
-</input-file> 
-```
-
-### Bonus
-Here's an example to post a file:
-```ts
-import { HttpClient } from '@angular/common/http';
-
-@Injectable()
-export class MyRepository {
-
-constructor(
-    private http: HttpClient
-) {}
-
-public post(file: InputFile): Observable<YourClass> {
-    const apiUrl = 'my-url';
-    const formData = new FormData();
-    formData.append('file', file.file, file.file.name);
-    return this.http.post<YourClass>(apiUrl, formData).pipe(
-        .catchError(...)
-}
-```
-
-## For developpers
-You're welcome, please fork this repository to a make pull request.
-
-## Demonstration
-Clone this repository and run `npm start`.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
