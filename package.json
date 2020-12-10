@@ -1,6 +1,6 @@
 {
   "name": "ngx-input-file",
-  "version": "10.0.0",
+  "version": "10.2.0",
   "description": "Angular Input File Component",
   "license": "MIT",
   "repository": {
@@ -25,6 +25,8 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
+    "build:lib": "ng-packagr -p projects/ngx-input-file/ng-package.json",
+    "publish": "npm publish dist/ngx-input-file",
     "test": "ng test",
     "lint": "ng lint"
   },
@@ -66,7 +68,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "material-design-icons": "^3.0.1",
-    "ng-packagr": "^10.1.0",
+    "ng-packagr": "^10.1.2",
     "protractor": "~7.0.0",
     "rxjs": "~6.6.3",
     "ts-node": "~8.3.0",
